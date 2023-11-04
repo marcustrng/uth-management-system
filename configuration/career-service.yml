@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/career_planning
+    spring.datasource.driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    schemas: public
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8093
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+
+info:
+  app:
+    name: ${spring.application.name}
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
