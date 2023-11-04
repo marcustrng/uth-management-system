@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    config:
+      uri: http://ums-server-config:8888
