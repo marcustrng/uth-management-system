@@ -7,12 +7,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    ## API SECURITY WITH KEYCLOAK PROVIDER
-    security:
-      oauth2:
-        resourceserver:
-          jwt:
-            jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+  ## API SECURITY WITH KEYCLOAK PROVIDER
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
 server:
   port: 8093
 
