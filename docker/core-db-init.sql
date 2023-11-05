@@ -1,3 +1,3 @@
-CREATE DATABASE student;
+CREATE DATABASE enrollment;
 CREATE DATABASE schedule;
 CREATE DATABASE career;
