@@ -33,7 +33,7 @@ create table public.semesters
     semester_id serial
         constraint semesters_pk
         primary key,
-    career_id   integer not null
+    career_id   integer
         constraint semesters_careers_career_id_fk
         references public.careers,
     semester_no smallint
