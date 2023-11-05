@@ -7,8 +7,39 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    ## API SECURITY WITH KEYCLOAK PROVIDER
+    security:
+      oauth2:
+        client:
+          provider:
+            keycloak:
+              authorization-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/auth
+              jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+              token-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/token
+              user-info-authentication-method: header
+              user-info-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/userinfo
+              user-name-attribute: preferred_username
+          registration:
+            internet-banking-core-client:
+              authorization-grant-type: authorization_code
+              client-id: ${app.config.keycloak.client-id}
+              client-secret: ${app.config.keycloak.client-secret}
+              provider: keycloak
+              redirect-uri: http://localhost:9300/login/oauth2/code/keycloak
+              scope: openid
+        resourceserver:
+          jwt:
+            jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
 server:
   port: 8093
+
+## SECURITY BASED CONFIGURATIONS
+app:
+  config:
+    keycloak:
+      url: http://localhost:9300/auth
+      realm: uth-oidc-dev
+      client-id: uth-client
 
 eureka:
   client:
