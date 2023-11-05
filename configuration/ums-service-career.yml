@@ -4,10 +4,6 @@ spring:
     spring.datasource.driver-class-name: org.postgresql.Driver
     username: postgres
     password: password
-  flyway:
-    baseline-on-migrate: true
-    enabled: true
-    schemas: public
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,7 +13,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8081/eureka
+      defaultZone: http://localhost:8761/eureka
 
 info:
   app:
