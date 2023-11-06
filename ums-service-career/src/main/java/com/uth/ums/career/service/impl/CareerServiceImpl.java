@@ -1,8 +1,13 @@
 package com.uth.ums.career.service.impl;
 
 import com.uth.ums.career.model.dto.CareerDto;
+import com.uth.ums.career.model.dto.CourseDto;
 import com.uth.ums.career.model.entity.Career;
+import com.uth.ums.career.model.entity.Course;
+import com.uth.ums.career.model.entity.Semester;
+import com.uth.ums.career.model.entity.SemesterCourse;
 import com.uth.ums.career.model.mapper.CareerMapper;
+import com.uth.ums.career.model.mapper.CourseMapper;
 import com.uth.ums.career.repository.CareerRepository;
 import com.uth.ums.career.service.CareerService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +20,7 @@ import java.util.List;
 public class CareerServiceImpl implements CareerService {
     private final CareerRepository careerRepository;
     private final CareerMapper careerMapper;
+    private final CourseMapper courseMapper;
 
     @Override
     public List<CareerDto> getAll() {
@@ -41,5 +47,15 @@ public class CareerServiceImpl implements CareerService {
     @Override
     public void delete(Long id) {
 
+    }
+
+    @Override
+    public List<CourseDto> getAllCourseByIdAndSemesterNo(Long id, Integer semesterNo) {
+        Career career = careerRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        return career.getSemesters().stream()
+            .filter(semester -> !semester.getSemesterNo().equals(semesterNo)).findFirst()
+            .orElseThrow(IllegalAccessError::new)
+            .getSemesterCourses().stream().map(SemesterCourse::getCourse).map(courseMapper::toDto)
+            .toList();
     }
 }

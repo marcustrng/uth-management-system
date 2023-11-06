@@ -1,6 +1,7 @@
 package com.uth.ums.career.controller;
 
 import com.uth.ums.career.model.dto.CareerDto;
+import com.uth.ums.career.model.dto.CourseDto;
 import com.uth.ums.career.model.mapper.CareerMapper;
 import com.uth.ums.career.service.CareerService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CareerController {
     private final CareerService careerService;
-    private final CareerMapper careerMapper;
 
     @GetMapping()
     public ResponseEntity<List<CareerDto>> getAll() {
@@ -27,5 +27,11 @@ public class CareerController {
     public ResponseEntity<CareerDto> save(@RequestBody CareerDto careerDto) {
         log.info("Career initiated in career-service from {}", careerDto.toString());
         return ResponseEntity.ok(careerService.createNew(careerDto));
+    }
+
+    @GetMapping(value = "/{id}/semester/{semesterNo}/courses")
+    public ResponseEntity<List<CourseDto>> getAllCourseByIdAndSemesterNo(@PathVariable("id") Long id,
+        @PathVariable("semesterNo") Integer semesterNo) {
+        return ResponseEntity.ok(careerService.getAllCourseByIdAndSemesterNo(id, semesterNo));
     }
 }
