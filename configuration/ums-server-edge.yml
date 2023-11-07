@@ -10,6 +10,13 @@ spring:
             - Path=/careers/**
           filters:
             - StripPrefix=1
+        ## STUDENT SERVICE
+        - id: ums-service-enrollment
+          uri: lb://ums-service-enrollment
+          predicates:
+            - Path=/students/**
+          filters:
+            - StripPrefix=1
 
 server:
   port: 8080
