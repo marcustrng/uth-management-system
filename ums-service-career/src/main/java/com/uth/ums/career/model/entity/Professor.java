@@ -1,29 +1,32 @@
 package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
-import java.util.Set;
-
-@Getter
-@Setter
+import lombok.ToString;
 @Entity
 @Table(name = "professors")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Professor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "professor_id", nullable = false)
-    private Long professorId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "professor_id")
+	private Long professorId;
 
-    private String firstName;
-    private String lastName;
-    private LocalDate dateOfBirth;
-    private String gender;
-    private String phoneNumber;
-    private String email;
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
 
-    @OneToMany(mappedBy = "professor")
-    Set<ProfessorCourse> professorCourses;
+	@Column(name = "last_name", nullable = false)
+	private String lastName;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "phone_number")
+	private String phoneNumber;
 }

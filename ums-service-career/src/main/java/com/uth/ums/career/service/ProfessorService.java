@@ -1,13 +1,15 @@
 package com.uth.ums.career.service;
 
-import com.uth.ums.career.model.dto.ProfessorDto;
-
+import com.uth.ums.career.model.entity.Professor;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProfessorService {
-    List<ProfessorDto> getAll();
-    ProfessorDto getById(Long id);
-    ProfessorDto createNew(ProfessorDto dto);
-    ProfessorDto update(Long id, ProfessorDto dto);
-    void delete(Long id);
+	List<Professor> getAllProfessors();
+
+	Optional<Professor> getProfessorById(Long id);
+
+	Professor saveProfessor(Professor professor);
+
+	void deleteProfessor(Long id);
 }

@@ -2,17 +2,20 @@ package com.uth.ums.career.model.mapper;
 
 import com.uth.ums.career.model.dto.ProfessorCourseDto;
 import com.uth.ums.career.model.entity.ProfessorCourse;
-import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-@Mapper(
-        componentModel = "spring",
-        uses = {},
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
+@Mapper
 public interface ProfessorCourseMapper {
-    ProfessorCourseDto toDto(ProfessorCourse entity);
-    ProfessorCourse toEntity(ProfessorCourseDto dto);
+	ProfessorCourseMapper INSTANCE = Mappers.getMapper(ProfessorCourseMapper.class);
+
+	@Mapping(source = "professor", target = "professor")
+	@Mapping(source = "course", target = "course")
+	ProfessorCourseDto toDto(ProfessorCourse professorCourse);
+
+	@Mapping(target = "id", ignore = true)
+	@Mapping(source = "professor", target = "professor")
+	@Mapping(source = "course", target = "course")
+	ProfessorCourse toEntity(ProfessorCourseDto professorCourseDto);
 }

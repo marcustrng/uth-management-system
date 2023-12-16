@@ -26,7 +26,7 @@ public class Room {
 
     private String roomCode;
     private String roomName;
-    private int roomCapacity;
+    private Long roomCapacity;
     private String location;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

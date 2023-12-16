@@ -1,94 +1,62 @@
-create table public.faculties
+-- Create the CareerLevel table
+CREATE TABLE career_levels
 (
-    faculty_id   serial
-        constraint faculties_pk
-        primary key,
-    faculty_name varchar(100)
+    career_level_id   SERIAL PRIMARY KEY,
+    career_level_name VARCHAR(50) NOT NULL
 );
 
-create table public.career_level
+-- Create the Department table
+CREATE TABLE departments
 (
-    career_level_id   serial
-        constraint career_level_pk
-        primary key,
-    career_level_name varchar(100) not null
+    department_id   SERIAL PRIMARY KEY,
+    department_name VARCHAR(50) NOT NULL
 );
 
-create table public.careers
+-- Create the Career table
+CREATE TABLE careers
 (
-    career_id       serial
-        constraint careers_pk
-        primary key,
-    career_level_id integer not null
-        constraint careers_career_level_career_level_id_fk
-        references public.career_level,
-    career_name     varchar(100),
-    faculty_id      integer not null
-        constraint careers_faculties_faculty_id_fk
-        references public.faculties
+    career_id                SERIAL PRIMARY KEY,
+    career_name              VARCHAR(100) NOT NULL,
+    department_id            INT REFERENCES departments (department_id),
+    duration_years           INT,
+    required_optative_courses INT,
+    career_level_id           INT REFERENCES career_levels (career_level_id)
 );
 
-create table public.semesters
+-- Create the Course table
+CREATE TABLE courses
 (
-    semester_id serial
-        constraint semesters_pk
-        primary key,
-    career_id   integer
-        constraint semesters_careers_career_id_fk
-        references public.careers,
-    semester_no smallint
+    course_id   SERIAL PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_code VARCHAR(20)  NOT NULL,
+    career_id   INT REFERENCES careers (career_id),
+    year       INT,
+    semester   INT,
+    optative   BOOLEAN
 );
 
-create table public.courses
+-- Create the CourseDependency table
+CREATE TABLE course_dependency
 (
-    course_id   serial
-        constraint courses_pk
-        primary key,
-    faculty_id   integer not null
-        constraint courses_faculty_faculty_id_fk
-            references public.faculties,
-    course_name varchar(100),
-    course_code varchar(20),
-    credits    smallint
+    course_id         INT REFERENCES courses (course_id),
+    required_course_id INT REFERENCES courses (course_id),
+    PRIMARY KEY (course_id, required_course_id)
 );
 
-create table semester_course
+-- Create the Professor table
+CREATE TABLE professors
 (
-    semester_course_id serial
-        constraint semester_course_pk
-            primary key,
-    semester_id        integer
-        constraint semester_course_semesters_semester_id_fk
-            references semesters,
-    course_id          integer
-        constraint semester_course_courses_course_id_fk
-            references courses
+    professor_id SERIAL PRIMARY KEY,
+    first_name   VARCHAR(50) NOT NULL,
+    last_name    VARCHAR(50) NOT NULL,
+    email       VARCHAR(100),
+    phone_number VARCHAR(20)
 );
 
-
-create table public.professors
+-- Create the ProfessorCourse table
+CREATE TABLE professor_course
 (
-    professor_id  serial
-        constraint professors_pk
-        primary key,
-    first_name    varchar(100),
-    last_name     varchar(100),
-    date_of_birth date,
-    gender        varchar(10),
-    phone_number  varchar(15),
-    email         varchar(50)
+    professor_id INT REFERENCES professors (professor_id),
+    course_id    INT REFERENCES courses (course_id),
+    PRIMARY KEY (professor_id, course_id)
 );
-
-create table public.professor_course
-(
-    professor_course_id serial
-        constraint professor_course_pk
-        primary key,
-    professor_id        integer not null
-        constraint professor_course_professors_professor_id_fk
-        references public.professors,
-    course_id           integer not null
-        constraint professor_course_courses_course_id_fk
-        references public.courses
-);
-

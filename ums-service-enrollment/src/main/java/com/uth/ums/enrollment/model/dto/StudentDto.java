@@ -13,7 +13,7 @@ import java.util.Set;
 @Value
 public class StudentDto implements Serializable {
     Long studentId;
-    int classId;
+    Long classId;
     String firstName;
     String lastName;
     LocalDate dateOfBirth;

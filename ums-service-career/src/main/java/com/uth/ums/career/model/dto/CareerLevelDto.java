@@ -1,14 +1,11 @@
 package com.uth.ums.career.model.dto;
 
-import lombok.Value;
-
+import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
 /**
  * DTO for {@link com.uth.ums.career.model.entity.CareerLevel}
  */
-@Value
-public class CareerLevelDto implements Serializable {
-    Long careerLevelId;
-    String careerLevelName;
-}
+public record CareerLevelDto(Long careerLevelId, @NotBlank String careerLevelName) implements Serializable {}

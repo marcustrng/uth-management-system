@@ -1,61 +1,40 @@
 package com.uth.ums.career.service.impl;
 
-import com.uth.ums.career.model.dto.CareerDto;
-import com.uth.ums.career.model.dto.CourseDto;
 import com.uth.ums.career.model.entity.Career;
-import com.uth.ums.career.model.entity.Course;
-import com.uth.ums.career.model.entity.Semester;
-import com.uth.ums.career.model.entity.SemesterCourse;
-import com.uth.ums.career.model.mapper.CareerMapper;
-import com.uth.ums.career.model.mapper.CourseMapper;
 import com.uth.ums.career.repository.CareerRepository;
 import com.uth.ums.career.service.CareerService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CareerServiceImpl implements CareerService {
-    private final CareerRepository careerRepository;
-    private final CareerMapper careerMapper;
-    private final CourseMapper courseMapper;
+	private final CareerRepository careerRepository;
 
-    @Override
-    public List<CareerDto> getAll() {
-        return careerRepository.findAll().stream().map(careerMapper::toDto).toList();
-    }
+	@Autowired
+	public CareerServiceImpl(CareerRepository careerRepository) {
+		this.careerRepository = careerRepository;
+	}
 
-    @Override
-    public CareerDto getById(Long id) {
-        return null;
-    }
+	@Override
+	public List<Career> getAllCareers() {
+		return careerRepository.findAll();
+	}
 
-    @Override
-    public CareerDto createNew(CareerDto dto) {
-        Career entity = careerMapper.toEntity(dto);
-        Career save = careerRepository.save(entity);
-        return careerMapper.toDto(save);
-    }
+	@Override
+	public Optional<Career> getCareerById(Long id) {
+		return careerRepository.findById(id);
+	}
 
-    @Override
-    public CareerDto update(Long id, CareerDto dto) {
-        return null;
-    }
+	@Override
+	public Career saveCareer(Career career) {
+		return careerRepository.save(career);
+	}
 
-    @Override
-    public void delete(Long id) {
-
-    }
-
-    @Override
-    public List<CourseDto> getAllCourseByIdAndSemesterNo(Long id, Integer semesterNo) {
-        Career career = careerRepository.findById(id).orElseThrow(IllegalAccessError::new);
-        return career.getSemesters().stream()
-            .filter(semester -> !semester.getSemesterNo().equals(semesterNo)).findFirst()
-            .orElseThrow(IllegalAccessError::new)
-            .getSemesterCourses().stream().map(SemesterCourse::getCourse).map(courseMapper::toDto)
-            .toList();
-    }
+	@Override
+	public void deleteCareer(Long id) {
+		careerRepository.deleteById(id);
+	}
 }

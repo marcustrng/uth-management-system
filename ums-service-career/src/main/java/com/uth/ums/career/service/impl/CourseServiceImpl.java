@@ -1,42 +1,40 @@
 package com.uth.ums.career.service.impl;
 
-import com.uth.ums.career.model.dto.CourseDto;
-import com.uth.ums.career.model.mapper.CourseMapper;
+import com.uth.ums.career.model.entity.Course;
 import com.uth.ums.career.repository.CourseRepository;
 import com.uth.ums.career.service.CourseService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
-    private final CourseRepository courseRepository;
-    private final CourseMapper courseMapper;
+	private final CourseRepository courseRepository;
 
-    @Override
-    public List<CourseDto> getAll() {
-        return courseRepository.findAll().stream().map(courseMapper::toDto).toList();
-    }
+	@Autowired
+	public CourseServiceImpl(CourseRepository courseRepository) {
+		this.courseRepository = courseRepository;
+	}
 
-    @Override
-    public CourseDto getById(Long id) {
-        return null;
-    }
+	@Override
+	public List<Course> getAllCourses() {
+		return courseRepository.findAll();
+	}
 
-    @Override
-    public CourseDto createNew(CourseDto dto) {
-        return null;
-    }
+	@Override
+	public Optional<Course> getCourseById(Long id) {
+		return courseRepository.findById(id);
+	}
 
-    @Override
-    public CourseDto update(Long id, CourseDto dto) {
-        return null;
-    }
+	@Override
+	public Course saveCourse(Course course) {
+		return courseRepository.save(course);
+	}
 
-    @Override
-    public void delete(Long id) {
-
-    }
+	@Override
+	public void deleteCourse(Long id) {
+		courseRepository.deleteById(id);
+	}
 }

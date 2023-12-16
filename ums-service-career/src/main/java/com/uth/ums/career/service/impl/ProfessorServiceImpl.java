@@ -1,42 +1,40 @@
 package com.uth.ums.career.service.impl;
 
-import com.uth.ums.career.model.dto.ProfessorDto;
-import com.uth.ums.career.model.mapper.ProfessorMapper;
+import com.uth.ums.career.model.entity.Professor;
 import com.uth.ums.career.repository.ProfessorRepository;
 import com.uth.ums.career.service.ProfessorService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class ProfessorServiceImpl implements ProfessorService {
-    private final ProfessorRepository professorRepository;
-    private final ProfessorMapper professorMapper;
+	private final ProfessorRepository professorRepository;
 
-    @Override
-    public List<ProfessorDto> getAll() {
-        return professorRepository.findAll().stream().map(professorMapper::toDto).toList();
-    }
+	@Autowired
+	public ProfessorServiceImpl(ProfessorRepository professorRepository) {
+		this.professorRepository = professorRepository;
+	}
 
-    @Override
-    public ProfessorDto getById(Long id) {
-        return null;
-    }
+	@Override
+	public List<Professor> getAllProfessors() {
+		return professorRepository.findAll();
+	}
 
-    @Override
-    public ProfessorDto createNew(ProfessorDto dto) {
-        return null;
-    }
+	@Override
+	public Optional<Professor> getProfessorById(Long id) {
+		return professorRepository.findById(id);
+	}
 
-    @Override
-    public ProfessorDto update(Long id, ProfessorDto dto) {
-        return null;
-    }
+	@Override
+	public Professor saveProfessor(Professor professor) {
+		return professorRepository.save(professor);
+	}
 
-    @Override
-    public void delete(Long id) {
-
-    }
+	@Override
+	public void deleteProfessor(Long id) {
+		professorRepository.deleteById(id);
+	}
 }

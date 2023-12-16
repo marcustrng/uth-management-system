@@ -23,7 +23,7 @@ public class CourseOccurrence {
     private String classCode;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int capacity;
+    private Long capacity;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "course_occurrence_id")

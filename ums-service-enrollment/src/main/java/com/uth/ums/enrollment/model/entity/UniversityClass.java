@@ -19,7 +19,7 @@ public class UniversityClass {
     private Long careerId;
     private String classCode;
     private String className;
-    private int classYear;
+    private Long classYear;
     private String classStatus;
 
     @OneToMany(mappedBy="universityClass")

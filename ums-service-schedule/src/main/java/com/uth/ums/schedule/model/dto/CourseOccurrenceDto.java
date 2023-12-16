@@ -18,6 +18,6 @@ public class CourseOccurrenceDto implements Serializable {
     String classCode;
     LocalDate startDate;
     LocalDate endDate;
-    int capacity;
+    Long capacity;
     Set<ScheduleDto> schedules;
 }

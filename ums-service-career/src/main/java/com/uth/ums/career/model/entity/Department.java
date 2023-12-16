@@ -1,4 +1,5 @@
 package com.uth.ums.career.model.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,18 +12,18 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "career_levels")
+@Table(name = "departments")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class CareerLevel {
+public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "career_level_id")
-	private Long careerLevelId;
+	@Column(name = "department_id")
+	private Long departmentId;
 
-	@Column(name = "career_level_name", nullable = false)
-	private String careerLevelName;
+	@Column(name = "department_name", nullable = false)
+	private String departmentName;
 }

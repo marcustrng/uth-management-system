@@ -2,31 +2,38 @@ package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Set;
-
-@Getter
-@Setter
 @Entity
 @Table(name = "courses")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id", nullable = false)
-    private Long courseId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "course_id")
+	private Long courseId;
 
-    private String courseName;
-    private String courseCode;
-    private Integer credits;
+	@Column(name = "course_name", nullable = false)
+	private String courseName;
 
-    @OneToMany(mappedBy = "course")
-    private Set<ProfessorCourse> professorCourses;
+	@Column(name = "course_code", nullable = false)
+	private String courseCode;
 
-    @OneToMany(mappedBy="course")
-    private Set<SemesterCourse> semesterCourses;
+	@ManyToOne
+	@JoinColumn(name = "career_id")
+	private Career career;
 
-    @ManyToOne
-    @JoinColumn(name="faculty_id", nullable=false)
-    private Faculty faculty;
+	@Column(name = "year")
+	private Integer year;
+
+	@Column(name = "semester")
+	private Integer semester;
+
+	@Column(name = "optative")
+	private boolean optative;
 }

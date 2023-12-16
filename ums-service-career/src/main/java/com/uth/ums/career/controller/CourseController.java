@@ -1,25 +1,64 @@
 package com.uth.ums.career.controller;
 
-import com.uth.ums.career.model.dto.CourseDto;
+import com.uth.ums.career.model.entity.Course;
 import com.uth.ums.career.service.CourseService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/courses")
-@RequiredArgsConstructor
+@RequestMapping("/courses")
 public class CourseController {
-    private final CourseService courseService;
+	private final CourseService courseService;
 
-    @GetMapping()
-    public ResponseEntity<List<CourseDto>> getAll() {
-        return ResponseEntity.ok(courseService.getAll());
-    }
+	@Autowired
+	public CourseController(CourseService courseService) {
+		this.courseService = courseService;
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Course>> getAllCourses() {
+		List<Course> courses = courseService.getAllCourses();
+		return new ResponseEntity<>(courses, HttpStatus.OK);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
+		Optional<Course> course = courseService.getCourseById(id);
+		return course.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+
+	@PostMapping
+	public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+		Course createdCourse = courseService.saveCourse(course);
+		return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course course) {
+		Optional<Course> existingCourse = courseService.getCourseById(id);
+		if (existingCourse.isPresent()) {
+			course.setCourseId(id);
+			Course updatedCourse = courseService.saveCourse(course);
+			return new ResponseEntity<>(updatedCourse, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+		Optional<Course> existingCourse = courseService.getCourseById(id);
+		if (existingCourse.isPresent()) {
+			courseService.deleteCourse(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

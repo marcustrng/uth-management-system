@@ -1,42 +1,40 @@
 package com.uth.ums.career.service.impl;
 
-import com.uth.ums.career.model.dto.CareerLevelDto;
-import com.uth.ums.career.model.mapper.CareerLevelMapper;
+import com.uth.ums.career.model.entity.CareerLevel;
 import com.uth.ums.career.repository.CareerLevelRepository;
 import com.uth.ums.career.service.CareerLevelService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CareerLevelServiceImpl implements CareerLevelService {
-    private final CareerLevelRepository careerLevelRepository;
-    private final CareerLevelMapper careerLevelMapper;
+	private final CareerLevelRepository careerLevelRepository;
 
-    @Override
-    public List<CareerLevelDto> getAll() {
-        return careerLevelRepository.findAll().stream().map(careerLevelMapper::toDto).toList();
-    }
+	@Autowired
+	public CareerLevelServiceImpl(CareerLevelRepository careerLevelRepository) {
+		this.careerLevelRepository = careerLevelRepository;
+	}
 
-    @Override
-    public CareerLevelDto getById(Long id) {
-        return null;
-    }
+	@Override
+	public List<CareerLevel> getAllCareerLevels() {
+		return careerLevelRepository.findAll();
+	}
 
-    @Override
-    public CareerLevelDto createNew(CareerLevelDto dto) {
-        return null;
-    }
+	@Override
+	public Optional<CareerLevel> getCareerLevelById(Long id) {
+		return careerLevelRepository.findById(id);
+	}
 
-    @Override
-    public CareerLevelDto update(Long id, CareerLevelDto dto) {
-        return null;
-    }
+	@Override
+	public CareerLevel saveCareerLevel(CareerLevel careerLevel) {
+		return careerLevelRepository.save(careerLevel);
+	}
 
-    @Override
-    public void delete(Long id) {
-
-    }
+	@Override
+	public void deleteCareerLevel(Long id) {
+		careerLevelRepository.deleteById(id);
+	}
 }

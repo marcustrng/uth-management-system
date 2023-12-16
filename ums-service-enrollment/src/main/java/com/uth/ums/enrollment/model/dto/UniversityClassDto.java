@@ -15,7 +15,7 @@ public class UniversityClassDto implements Serializable {
     Long careerId;
     String classCode;
     String className;
-    int classYear;
+    Long classYear;
     String classStatus;
     Set<StudentDto> students;
 }

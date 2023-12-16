@@ -1,18 +1,14 @@
 package com.uth.ums.career.model.dto;
 
-import lombok.Value;
-
+import com.uth.ums.career.model.dto.CareerDto;
+import com.uth.ums.career.model.entity.Course;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
- * DTO for {@link com.uth.ums.career.model.entity.Course}
+ * DTO for {@link Course}
  */
-@Value
-public class CourseDto implements Serializable {
-    Long courseId;
-    String courseName;
-    String courseCode;
-    Integer credits;
-    transient Set<ProfessorCourseDto> professorCourses;
+public record CourseDto(Long courseId, @NotBlank String courseName, @NotBlank String courseCode, CareerDto career, @NotNull Integer year, @NotNull Integer semester, boolean optative) implements
+		Serializable {
 }

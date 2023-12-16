@@ -7,7 +7,7 @@ volumes:
     driver: local
 
 services:
-  core-database:
+  ums-database:
     build:
       context: ./docker
       dockerfile: core-db.Dockerfile

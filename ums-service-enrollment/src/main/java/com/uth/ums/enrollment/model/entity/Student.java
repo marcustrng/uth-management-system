@@ -17,7 +17,7 @@ public class Student {
     @Column(name = "student_id", nullable = false)
     private Long studentId;
 
-    private int classId;
+    private Long classId;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;

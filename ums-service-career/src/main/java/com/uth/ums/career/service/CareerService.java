@@ -1,15 +1,15 @@
 package com.uth.ums.career.service;
 
-import com.uth.ums.career.model.dto.CareerDto;
-
-import com.uth.ums.career.model.dto.CourseDto;
+import com.uth.ums.career.model.entity.Career;
 import java.util.List;
+import java.util.Optional;
 
 public interface CareerService {
-    List<CareerDto> getAll();
-    CareerDto getById(Long id);
-    CareerDto createNew(CareerDto dto);
-    CareerDto update(Long id, CareerDto dto);
-    void delete(Long id);
-    List<CourseDto> getAllCourseByIdAndSemesterNo(Long id, Integer semesterNo);
+	List<Career> getAllCareers();
+
+	Optional<Career> getCareerById(Long id);
+
+	Career saveCareer(Career career);
+
+	void deleteCareer(Long id);
 }

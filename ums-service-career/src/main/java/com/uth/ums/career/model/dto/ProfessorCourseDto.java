@@ -1,14 +1,12 @@
 package com.uth.ums.career.model.dto;
 
-import lombok.Value;
-
+import com.uth.ums.career.model.dto.CourseDto;
+import com.uth.ums.career.model.dto.ProfessorDto;
+import com.uth.ums.career.model.entity.ProfessorCourse;
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.uth.ums.career.model.entity.ProfessorCourse}
+ * DTO for {@link ProfessorCourse}
  */
-@Value
-public class ProfessorCourseDto implements Serializable {
-    Long professorCourseId;
-    ProfessorDto professor;
+public record ProfessorCourseDto(ProfessorDto professor, CourseDto course) implements Serializable {
 }

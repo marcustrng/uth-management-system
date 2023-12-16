@@ -12,6 +12,6 @@ public class RoomDto implements Serializable {
     Long roomId;
     String roomCode;
     String roomName;
-    int roomCapacity;
+    Long roomCapacity;
     String location;
 }

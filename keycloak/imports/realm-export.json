@@ -1233,7 +1233,7 @@
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "updated_at",
-            "jsonType.label": "long"
+            "jsonType.label": "Long"
           }
         },
         {
