@@ -2,26 +2,57 @@ package com.uth.ums.enrollment.controller;
 
 import com.uth.ums.enrollment.model.dto.StudentDto;
 import com.uth.ums.enrollment.service.StudentService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/students")
-@RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+@RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
 
-    @GetMapping()
-    public ResponseEntity<List<StudentDto>> getAll() {
-        return ResponseEntity.ok(studentService.getAll());
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @PostMapping
+    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDTO) {
+        StudentDto createdStudent = studentService.createStudent(studentDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
+    }
+
+    @PutMapping("/{studentId}")
+    public ResponseEntity<StudentDto> updateStudent(
+            @PathVariable int studentId, @RequestBody StudentDto studentDTO) {
+        StudentDto updatedStudent = studentService.updateStudent(studentId, studentDTO);
+        if (updatedStudent != null) {
+            return ResponseEntity.ok(updatedStudent);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable int studentId) {
+        studentService.deleteStudent(studentId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity<StudentDto> getStudentById(@PathVariable int studentId) {
+        StudentDto studentDTO = studentService.getStudentById(studentId);
+        if (studentDTO != null) {
+            return ResponseEntity.ok(studentDTO);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StudentDto>> getAllStudents() {
+        List<StudentDto> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
     }
 }

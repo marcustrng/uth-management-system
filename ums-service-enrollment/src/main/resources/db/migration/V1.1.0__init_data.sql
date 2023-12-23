@@ -1,14 +1,27 @@
-INSERT INTO public.classes ( class_code, class_name, class_year, class_status)
-VALUES ('CN22LT', 'Information Technology', 2022, 'Active');
+INSERT INTO student (last_name, first_name, date_of_birth, email, phone_number)
+VALUES ('Doe', 'John', '1990-05-15', 'johndoe@example.com', '123-456-7890'),
+       ('Smith', 'Jane', '1995-09-21', 'janesmith@example.com', '987-654-3210'),
+       ('Johnson', 'Michael', '1992-11-30', 'michaeljohnson@example.com', '555-123-4567'),
+       ('Johnson', 'Robert', '1993-07-12', 'robertjohnson@example.com', '111-222-3333'),
+       ('Brown', 'Emily', '1998-04-28', 'emilybrown@example.com', '444-555-6666'),
+       ('Davis', 'Sarah', '1991-12-03', 'sarahdavis@example.com', '777-888-9999'),
+       ('Anderson', 'Jennifer', '1994-09-08', 'jenniferanderson@example.com', '111-111-1111'),
+       ('Wilson', 'David', '1997-02-14', 'davidwilson@example.com', '222-222-2222'),
+       ('Taylor', 'Jessica', '1996-06-25', 'jessicataylor@example.com', '333-333-3333');
 
-INSERT INTO public.students (class_id, student_code, first_name, last_name, date_of_birth, gender, phone_number, email, career_status_name, career_status_date)
-VALUES (1, 'STU001', 'John', 'Doe', '2000-05-15', 'Male', '+1234567890', 'john.doe@example.com', 'Enrolled', '2022-08-01');
+INSERT INTO career_status (career_status_name)
+VALUES ('Enrolled'),
+       ('Finalized'),
+       ('Drop Out');
 
-INSERT INTO public.students (class_id, student_code, first_name, last_name, date_of_birth, gender, phone_number, email, career_status_name, career_status_date)
-VALUES (1, 'STU002', 'Jane', 'Smith', '2001-02-28', 'Female', '+9876543210', 'jane.smith@example.com', 'Enrolled', '2022-08-01');
 
-INSERT INTO public.students (class_id, student_code, first_name, last_name, date_of_birth, gender, phone_number, email, career_status_name, career_status_date)
-VALUES (1, 'STU003', 'Michael', 'Johnson', '1999-11-10', 'Male', '+2345678901', 'michael.johnson@example.com', 'Enrolled', '2023-08-01');
+INSERT INTO career_enrollment (student_id, career_id, enrollment_date, career_status_id, career_status_date)
+VALUES
+  (2, 1, '2022-03-10', 1, '2022-03-15'),
+  (3, 2, '2022-04-20', 3, '2022-05-01');
 
-INSERT INTO public.students (class_id, student_code, first_name, last_name, date_of_birth, gender, phone_number, email, career_status_name, career_status_date)
-VALUES (1, 'STU004', 'Emily', 'Davis', '2000-07-22', 'Female', '+6789012345', 'emily.davis@example.com', 'Enrolled', '2023-08-01');
+INSERT INTO course_enrollment (student_id, course_occurrence_id, final_score)
+VALUES
+  (2, 1, 85.0),
+  (3, 2, 78.5),
+  (4, 3, 91.2);

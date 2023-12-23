@@ -1,36 +1,30 @@
 package com.uth.ums.enrollment.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
-import java.util.Set;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id", nullable = false)
-    private Long studentId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "student_id")
+  private int studentId;
 
-    private Long classId;
-    private String firstName;
-    private String lastName;
-    private LocalDate dateOfBirth;
-    private String gender;
-    private String phoneNumber;
-    private String email;
-    private String careerStatusName;
-    private LocalDate careerStatusDate;
+  @Column(name = "last_name", length = 50)
+  private String lastName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "university_class_id")
-    private UniversityClass universityClass;
+  @Column(name = "first_name", length = 50)
+  private String firstName;
 
-    @OneToMany(mappedBy="student")
-    private Set<CourseEnrollment> courseEnrollments;
+  @Column(name = "date_of_birth")
+  private LocalDate dateOfBirth;
+
+  @Column(name = "email", length = 100)
+  private String email;
+
+  @Column(name = "phone_number", length = 20)
+  private String phoneNumber;
 }

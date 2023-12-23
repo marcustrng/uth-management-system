@@ -4,9 +4,13 @@ import com.uth.ums.enrollment.model.dto.StudentDto;
 import java.util.List;
 
 public interface StudentService {
-    List<StudentDto> getAll();
-    StudentDto getById(Long id);
-    StudentDto createNew(StudentDto dto);
-    StudentDto update(Long id, StudentDto dto);
-    void delete(Long id);
+  StudentDto createStudent(StudentDto studentDTO);
+
+  StudentDto updateStudent(int studentId, StudentDto studentDTO);
+
+  void deleteStudent(int studentId);
+
+  StudentDto getStudentById(int studentId);
+
+  List<StudentDto> getAllStudents();
 }

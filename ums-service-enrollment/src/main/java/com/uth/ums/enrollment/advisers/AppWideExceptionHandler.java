@@ -1,9 +1,10 @@
 package com.uth.ums.enrollment.advisers;
 
 
-import com.uth.ums.schedule.exception.NotFoundException;
-import com.uth.ums.schedule.exception.ValidateException;
-import com.uth.ums.schedule.util.StandardResponse;
+
+import com.uth.ums.enrollment.exception.NotFoundException;
+import com.uth.ums.enrollment.exception.ValidateException;
+import com.uth.ums.enrollment.util.StandardResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

@@ -1,27 +1,26 @@
 package com.uth.ums.enrollment.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "course_enrollment")
 public class CourseEnrollment {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_enrollment_id", nullable = false)
+    @Column(name = "course_enrollment_id")
     private Long courseEnrollmentId;
-
+    
+    @Column(name = "student_id")
+    private Long studentId;
+    
+    @Column(name = "course_occurrence_id")
     private Long courseOccurrenceId;
-    private Double attendanceScore;
-    private Double progressScore;
-    private Double midtermExamScore;
-    private Double finalExamScore;
+    
+    @Column(name = "final_score")
     private Double finalScore;
-
-    @ManyToOne
-    @JoinColumn(name="student_id", nullable=false)
-    private Student student;
 }
