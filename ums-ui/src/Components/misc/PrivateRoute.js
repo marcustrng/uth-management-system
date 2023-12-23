@@ -4,9 +4,9 @@ import { useKeycloak } from '@react-keycloak/web'
 function PrivateRoute({ children }) {
     const { keycloak } = useKeycloak()
 
-    const Login = async () => {
-        console.log("keycloak 1", keycloak);
-        await keycloak.login()
+    const Login = () => {
+        console.log("keycloak", keycloak);
+        keycloak.login().then(r => console.log("keycloak r", r))
     }
 
     return keycloak.authenticated ? children : <Login />
