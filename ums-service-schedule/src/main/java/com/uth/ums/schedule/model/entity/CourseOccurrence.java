@@ -1,31 +1,50 @@
 package com.uth.ums.schedule.model.entity;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "course_occurrence")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class CourseOccurrence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_occurrence_id", nullable = false)
+    @Column(name = "course_occurrence_id")
     private Long courseOccurrenceId;
 
-    private Long courseId;
-    private Long professorId;
-    private String courseOccurrenceCode;
-    private String classCode;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Long capacity;
+    @Column(name = "course_id")
+    private Integer courseId;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "course_occurrence_id")
-    private Set<Schedule> schedules;
+    @Column(name = "occurrence_year")
+    private Integer occurrenceYear;
+
+    @Column(name = "course_occurrence_code", length = 255)
+    private String courseOccurrenceCode;
+
+    @Column(name = "professor_id")
+    private Integer professorId;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "capacity")
+    private Integer capacity;
 }

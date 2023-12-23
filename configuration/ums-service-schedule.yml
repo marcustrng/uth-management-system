@@ -36,6 +36,7 @@ eureka:
 info:
   app:
     name: ${spring.application.name}
+
 springdoc:
   api-docs:
     path: /api-docs

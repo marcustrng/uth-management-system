@@ -1,46 +1,35 @@
-create table public.course_occurrence
-(
-    course_occurrence_id   serial
-        constraint course_occurrence_pk
-        primary key,
-    course_id              integer,
-    professor_id           integer,
-    course_occurrence_code varchar(20),
-    class_code             varchar(10),
-    start_date             date,
-    end_date               date,
-    capacity               smallint
+CREATE TABLE room (
+    room_id SERIAL PRIMARY KEY,
+    room_code VARCHAR(255),
+    room_name VARCHAR(255),
+    room_capacity INTEGER,
+    location VARCHAR(255)
 );
 
-create table public.rooms
-(
-    room_id       serial
-        constraint rooms_pk
-        primary key,
-    room_code     char(4) not null
-        constraint rooms_pk2
-        unique,
-    room_name     varchar(100),
-    room_capacity smallint,
-    location      varchar(100)
+CREATE TABLE course_occurrence (
+    course_occurrence_id SERIAL PRIMARY KEY,
+    course_id INTEGER,
+    occurrence_year INTEGER,
+    course_occurrence_code VARCHAR(255),
+    professor_id INTEGER,
+    start_date DATE,
+    end_date DATE,
+    capacity INTEGER
 );
 
-create unique index rooms_room_code_uindex
-    on public.rooms (room_code);
-
-create table if not exists public.schedules
-(
-    schedule_id          serial
-        constraint schedules_pk
-        primary key,
-    course_occurrence_id integer
-        constraint schedules_course_occurrence_course_occurrence_id_fk
-        references public.course_occurrence,
-    room_id              integer
-        constraint schedules_rooms_room_id_fk
-        references public.rooms,
-    day_of_week          char(2),
-    start_date           date,
-    end_date             date
+CREATE TABLE assistant_professor (
+    course_occurrence_id INTEGER,
+    professor_id INTEGER,
+    professor_role_id INTEGER,
+    PRIMARY KEY (course_occurrence_id, professor_id),
+    FOREIGN KEY (course_occurrence_id) REFERENCES course_occurrence (course_occurrence_id)
 );
 
+CREATE TABLE schedule (
+    schedule_id SERIAL PRIMARY KEY,
+    course_occurrence_id INTEGER REFERENCES course_occurrence (course_occurrence_id),
+    day_of_week VARCHAR(2),
+    start_time TIME,
+    end_time TIME,
+    room_id INTEGER REFERENCES room (room_id)
+);
