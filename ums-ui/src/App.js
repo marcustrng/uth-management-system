@@ -6,7 +6,25 @@ import axios from "axios";
 import UserService from "./services/UserService";
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './Components';
-import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './Pages';
+import {
+  Ecommerce,
+  Orders,
+  Calendar,
+  Employees,
+  Stacked,
+  Pyramid,
+  Customers,
+  Kanban,
+  Line,
+  Area,
+  Bar,
+  Pie,
+  Financial,
+  ColorPicker,
+  ColorMapping,
+  Editor,
+  Profile
+} from './Pages';
 import './App.css';
 
 import { useStateContext } from './Contexts/ContextProvider';
@@ -86,6 +104,7 @@ const App = () => {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
+                <Route path="/profile" element={<Profile />} />
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />
