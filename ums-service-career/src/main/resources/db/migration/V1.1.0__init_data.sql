@@ -8,14 +8,14 @@ VALUES ('Science'),
        ('Literature'),
        ('Engineering');
 
-INSERT INTO careers (career_name, department_id, duration_years, required_optative_courses,
+INSERT INTO careers (career_name, department_id, duration_years, required_optional_courses,
                      career_level_id)
 VALUES ('Mechanical Engineering', 3, 4, 4, 1),
        ('Psychology', 2, 5, 6, 1),
        ('Computer Science', 1, 4, 3, 2),
        ('Chemistry', 1, 3, 2, 2);
 
-INSERT INTO courses (course_name, course_code, career_id, year, semester, optative)
+INSERT INTO courses (course_name, course_code, career_id, year, semester, optional)
 VALUES ('Mathematics 1', 'MAT-1', 1, 1, 1, false),
        ('Mathematics 2', 'MAT-2', 1, 2, 1, false),
        ('Physics 1', 'PHY-1', 1, 1, 2, false),
