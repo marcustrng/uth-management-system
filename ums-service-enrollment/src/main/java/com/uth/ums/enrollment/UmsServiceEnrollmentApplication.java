@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.env.AbstractEnvironment;
@@ -16,6 +17,7 @@ import org.springframework.core.env.MutablePropertySources;
 @SpringBootApplication
 @RequiredArgsConstructor
 @Log4j2
+@EnableFeignClients
 public class UmsServiceEnrollmentApplication {
 
 	public static void main(String[] args) {

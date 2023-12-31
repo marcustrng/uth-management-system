@@ -1,10 +1,26 @@
 package com.uth.ums.enrollment.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
-import lombok.Data;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.ToString.Exclude;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "student")
 public class Student {
@@ -27,4 +43,12 @@ public class Student {
 
   @Column(name = "phone_number", length = 20)
   private String phoneNumber;
+
+  @OneToMany(mappedBy = "student")
+  @Exclude
+  private Set<CareerEnrollment> careerEnrollments;
+
+  @OneToMany(mappedBy = "student")
+  @Exclude
+  private Set<CourseEnrollment> courseEnrollments;
 }

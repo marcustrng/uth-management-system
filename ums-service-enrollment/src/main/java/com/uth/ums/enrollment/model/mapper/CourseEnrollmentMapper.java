@@ -11,15 +11,8 @@ public interface CourseEnrollmentMapper {
 
   CourseEnrollmentMapper INSTANCE = Mappers.getMapper(CourseEnrollmentMapper.class);
 
-  @Mapping(target = "courseEnrollmentId", source = "courseEnrollment.courseEnrollmentId")
-  @Mapping(target = "studentId", source = "courseEnrollment.studentId")
-  @Mapping(target = "courseOccurrenceId", source = "courseEnrollment.courseOccurrenceId")
-  @Mapping(target = "finalScore", source = "courseEnrollment.finalScore")
   CourseEnrollmentDto toDTO(CourseEnrollment courseEnrollment);
 
-  @Mapping(target = "courseEnrollmentId", source = "dto.courseEnrollmentId")
-  @Mapping(target = "studentId", source = "dto.studentId")
-  @Mapping(target = "courseOccurrenceId", source = "dto.courseOccurrenceId")
-  @Mapping(target = "finalScore", source = "dto.finalScore")
+  @Mapping(target = "student", ignore = true)
   CourseEnrollment toEntity(CourseEnrollmentDto dto);
 }
