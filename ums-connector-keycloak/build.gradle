@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.5'
@@ -32,6 +35,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.keycloak:keycloak-admin-client:23.0.3'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    implementation 'org.flywaydb:flyway-core'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
@@ -52,4 +56,18 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.register('flywayNewTemplate') {
+    description 'Creates new sql migration template.'
+    doLast {
+        def version = '1.0'
+        def marker = LocalDateTime.now().format(DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))
+        String fileName = "V${version}.${marker}__RENAME_ME.sql"
+
+        def flywayLocation = "${sourceSets.main.resources.sourceDirectories.first().path}/db/migration"
+        new File("${flywayLocation}/${fileName}").createNewFile()
+
+        println "Created a new migration file: ${fileName}"
+    }
 }

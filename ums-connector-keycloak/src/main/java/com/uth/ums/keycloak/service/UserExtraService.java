@@ -1,7 +1,7 @@
-package com.uth.ums.ums.keycloak.service;
+package com.uth.ums.keycloak.service;
 
 
-import com.uth.ums.ums.keycloak.model.UserExtra;
+import com.uth.ums.keycloak.model.UserExtra;
 import java.util.Optional;
 
 public interface UserExtraService {

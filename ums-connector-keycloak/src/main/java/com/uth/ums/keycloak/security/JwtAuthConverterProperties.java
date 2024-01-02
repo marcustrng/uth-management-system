@@ -1,7 +1,8 @@
-package com.uth.ums.ums.keycloak.security;
+package com.uth.ums.keycloak.security;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Data
 @Validated
 @Configuration
+@RequiredArgsConstructor
 public class JwtAuthConverterProperties {
 
 	@NotBlank

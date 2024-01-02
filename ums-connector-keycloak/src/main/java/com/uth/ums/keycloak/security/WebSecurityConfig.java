@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.security;
+package com.uth.ums.keycloak.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

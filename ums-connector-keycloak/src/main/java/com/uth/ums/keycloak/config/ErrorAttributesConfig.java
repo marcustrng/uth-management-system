@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.config;
+package com.uth.ums.keycloak.config;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.error.ErrorAttributeOptions.Include;

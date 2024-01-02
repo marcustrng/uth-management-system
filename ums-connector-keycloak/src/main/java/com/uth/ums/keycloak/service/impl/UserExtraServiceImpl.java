@@ -1,9 +1,9 @@
-package com.uth.ums.ums.keycloak.service.impl;
+package com.uth.ums.keycloak.service.impl;
 
-import com.uth.ums.ums.keycloak.exception.UserExtraNotFoundException;
-import com.uth.ums.ums.keycloak.model.UserExtra;
-import com.uth.ums.ums.keycloak.repository.UserExtraRepository;
-import com.uth.ums.ums.keycloak.service.UserExtraService;
+import com.uth.ums.keycloak.exception.UserExtraNotFoundException;
+import com.uth.ums.keycloak.model.UserExtra;
+import com.uth.ums.keycloak.repository.UserExtraRepository;
+import com.uth.ums.keycloak.service.UserExtraService;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

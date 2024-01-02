@@ -1,10 +1,10 @@
-package com.uth.ums.ums.keycloak.controller;
+package com.uth.ums.keycloak.controller;
 
-import static com.uth.ums.ums.keycloak.config.SwaggerConfig.BEARER_KEY_SECURITY_SCHEME;
+import static com.uth.ums.keycloak.config.SwaggerConfig.BEARER_KEY_SECURITY_SCHEME;
 
-import com.uth.ums.ums.keycloak.dto.UserExtraRequest;
-import com.uth.ums.ums.keycloak.model.UserExtra;
-import com.uth.ums.ums.keycloak.service.UserExtraService;
+import com.uth.ums.keycloak.dto.UserExtraRequest;
+import com.uth.ums.keycloak.model.UserExtra;
+import com.uth.ums.keycloak.service.UserExtraService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;

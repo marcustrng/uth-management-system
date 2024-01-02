@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.config;
+package com.uth.ums.keycloak.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

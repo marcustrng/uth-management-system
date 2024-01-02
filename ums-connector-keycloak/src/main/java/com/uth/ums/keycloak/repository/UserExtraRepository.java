@@ -1,7 +1,7 @@
-package com.uth.ums.ums.keycloak.repository;
+package com.uth.ums.keycloak.repository;
 
 
-import com.uth.ums.ums.keycloak.model.UserExtra;
+import com.uth.ums.keycloak.model.UserExtra;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

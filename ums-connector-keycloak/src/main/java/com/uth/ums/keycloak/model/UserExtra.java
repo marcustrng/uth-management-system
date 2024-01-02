@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.model;
+package com.uth.ums.keycloak.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

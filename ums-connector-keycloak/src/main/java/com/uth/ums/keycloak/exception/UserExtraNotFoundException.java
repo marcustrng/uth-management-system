@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.exception;
+package com.uth.ums.keycloak.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

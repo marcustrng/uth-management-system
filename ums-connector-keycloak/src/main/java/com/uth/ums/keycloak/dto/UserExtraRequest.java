@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.dto;
+package com.uth.ums.keycloak.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

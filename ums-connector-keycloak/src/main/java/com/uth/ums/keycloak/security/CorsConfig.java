@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.security;
+package com.uth.ums.keycloak.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

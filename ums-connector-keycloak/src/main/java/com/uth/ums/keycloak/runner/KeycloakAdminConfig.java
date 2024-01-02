@@ -1,4 +1,4 @@
-package com.uth.ums.ums.keycloak.runner;
+package com.uth.ums.keycloak.runner;
 
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;

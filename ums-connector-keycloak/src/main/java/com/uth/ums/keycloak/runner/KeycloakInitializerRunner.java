@@ -1,6 +1,6 @@
-package com.uth.ums.ums.keycloak.runner;
+package com.uth.ums.keycloak.runner;
 
-import com.uth.ums.ums.keycloak.security.WebSecurityConfig;
+import com.uth.ums.keycloak.security.WebSecurityConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
