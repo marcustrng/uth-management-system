@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: ums-connector-keycloak
+  datasource:
+    url: jdbc:postgresql://localhost:5432/keycloak
+    spring.datasource.driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9300/realms/uth-oidc-dev
+
+jwt:
+  auth:
+    converter:
+      resource-id: uth-client
+      principal-attribute: preferred_username
+
+app:
+  cors:
+    allowed-origins: http://localhost:3000
+
+management:
+  endpoints:
+    web:
+      exposure.include: beans, env, health, info, metrics, mappings
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    groups-order: DESC
+    disable-swagger-default-url: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
