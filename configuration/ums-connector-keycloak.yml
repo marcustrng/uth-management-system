@@ -27,6 +27,8 @@ app:
       url: http://localhost:9300/auth
       realm: uth-oidc-dev
       client-id: uth-client
+  cors:
+    allowed-origins: *
 
 eureka:
   client:

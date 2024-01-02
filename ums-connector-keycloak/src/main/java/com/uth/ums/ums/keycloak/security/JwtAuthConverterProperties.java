@@ -2,17 +2,17 @@ package com.uth.ums.ums.keycloak.security;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 @Data
 @Validated
 @Configuration
-@ConfigurationProperties(prefix = "jwt.auth.converter")
 public class JwtAuthConverterProperties {
 
-    @NotBlank
-    private String resourceId;
-    private String principalAttribute;
+	@NotBlank
+	@Value("${app.config.keycloak.client-id}")
+	private String clientID;
+	private String principalAttribute;
 }
