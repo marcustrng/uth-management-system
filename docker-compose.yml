@@ -1,21 +1,18 @@
-version: '3'
-
-volumes:
-  postgres_data:
-    driver: local
+version: "3.8"
 
 services:
+
   postgres:
     build:
       context: ./docker
-      dockerfile: docker/postgres.Dockerfile
-    volumes:
-      - postgres_core_data:/var/lib/postgresql/data
+      dockerfile: postgres.Dockerfile
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
     healthcheck:
       test: "pg_isready -U postgres"
 
@@ -37,4 +34,4 @@ services:
     depends_on:
       - postgres
     healthcheck:
-      test: "curl -f http://localhost:8080/health/ready || exit 1"
+      test: "curl -f http://localhost:9300/health/ready || exit 1"

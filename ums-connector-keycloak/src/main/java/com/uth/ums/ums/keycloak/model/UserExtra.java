@@ -22,4 +22,8 @@ public class UserExtra {
 	@Column(name = "username")
     private String username;
     private String avatar;
+
+	public UserExtra(String username) {
+		this.username = username;
+	}
 }

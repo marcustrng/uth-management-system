@@ -4,6 +4,7 @@ import static com.uth.ums.ums.keycloak.config.SwaggerConfig.BEARER_KEY_SECURITY_
 
 import com.uth.ums.ums.keycloak.dto.UserExtraRequest;
 import com.uth.ums.ums.keycloak.model.UserExtra;
+import com.uth.ums.ums.keycloak.service.UserExtraService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
