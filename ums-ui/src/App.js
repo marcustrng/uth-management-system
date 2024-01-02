@@ -1,306 +1,102 @@
-import React, { Component } from "react";
-import "./App.css";
-import axios from "axios";
-import jwt from "jsonwebtoken";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { FiSettings } from 'react-icons/fi';
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import Login from "./component/Login.jsx";
-import Temp from "./component/Temp.jsx";
-import NotFound404 from "./component/NotFound404.jsx";
-import DashboardAdmin from "./component/admin/DashboardAdmin.jsx";
-import DashboardHR from "./component/hr/DashboardHR.jsx";
-import DashboardEmployee from "./component/employee/DashboardEmployee.jsx";
-import { Switch } from "react-router";
+import { Navbar, Footer, Sidebar, ThemeSettings } from './Components';
+import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './Pages';
+import './App.css';
 
-import {
-  HashRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  DefaultRoute
-} from "react-router-dom";
-import history from "./history.js";
+import { useStateContext } from './Contexts/ContextProvider';
 
-class App extends Component {
-  state = {
-    data: {},
-    loading: false,
-    pass: true,
-    isLogin: false,
-    firstTimeAlert: true,
-  };
-  componentDidMount() {
-    this.setState({
-      data: {
-        _id: localStorage.getItem("_id") || "",
-        Account: localStorage.getItem("Account") || "",
-        Name: localStorage.getItem("Name") || ""
-      },
-      isLogin: localStorage.getItem("isLogin") == "true"
+const App = () => {
+  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
 
-    }, () => {
-      // temporary : for user to see user id and pass of all accounts to explore all features of app
-      this.alertFirstTime()
-    });
-
-  }
-  alertFirstTime() {
-    if (this.state.firstTimeAlert && !this.state.isLogin) {
-      setTimeout(function () {
-        window.alert(
-          `To explore the feature of this application here is the temporary id and pass for all account
-      Admin:
-          id:admin@gmail.com
-          pass:admin
-      Hr:
-          id:hr@gmail.com
-          pass:hr
-      Employee:
-          id:emp@gmail.com
-          pass:emp
-      `)
-      }, 500);
-
-      this.setState({ firstTimeAlert: false });
+  useEffect(() => {
+    const currentThemeColor = localStorage.getItem('colorMode');
+    const currentThemeMode = localStorage.getItem('themeMode');
+    if (currentThemeColor && currentThemeMode) {
+      setCurrentColor(currentThemeColor);
+      setCurrentMode(currentThemeMode);
     }
-  }
-  render() {
-    return (
-      // <div>{this.state.isLogin ? (
-      //   <div>
+  }, []);
 
-      //   <DashboardAdmin data={this.state.data}/>
-      //   </div>
-      // ) : (
-      // <Login
-      //   onSubmit={this.handleSubmit}
-      //   loading={this.state.loading}
-      //   pass={this.state.pass}
-      // />
-      // )}</div>
-      //  <DashboardAdmin data={this.state.data}/>
-      //  <DashboardHR  data={this.state.data}/>
-      //  <DashboardEmployee   data={this.state.data}/>
-      //  <Temp />
-      // <NotFound404/>
-      < Router >
+  return (
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+      <BrowserRouter>
+        <div className="flex relative dark:bg-main-dark-bg">
+          <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
+            <TooltipComponent
+              content="Settings"
+              position="Top"
+            >
+              <button
+                type="button"
+                onClick={() => setThemeSettings(true)}
+                style={{ background: currentColor, borderRadius: '50%' }}
+                className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
+              >
+                <FiSettings />
+              </button>
 
-        <Switch>
-          <Route
-            exact
-            path="/login"
-            render={props =>
-              this.state.data["Account"] == 1 ? (
-                // <Dashboard />
-                <Redirect to="/admin" />
-              ) : // <Login OnLogin={this.handleLogin}/>
-
-                this.state.data["Account"] == 2 ? (
-                  // <Dashboard />
-                  <Redirect to="/hr" />
-                ) : //
-                  this.state.data["Account"] == 3 ? (
-                    // <Dashboard />
-                    <Redirect to="/employee" />
-                  ) : (
-                      <Login
-                        onSubmit={this.handleSubmit}
-                        loading={this.state.loading}
-                        pass={this.state.pass}
-                      />
-                    )
+            </TooltipComponent>
+          </div>
+          {activeMenu ? (
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+              <Sidebar />
+            </div>
+          ) : (
+            <div className="w-0 dark:bg-secondary-dark-bg">
+              <Sidebar />
+            </div>
+          )}
+          <div
+            className={
+              activeMenu
+                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
+                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
             }
-          />
-          <Route
-            // exact
-            path="/admin"
-            render={props =>
-              this.state.data["Account"] == 1 ? (
-                <DashboardAdmin
-                  data={this.state.data}
-                  onLogout={this.handleLogout}
-                />
-              ) : (
-                  <Redirect to="/login" />
-                )
-            }
-          />
-          <Route
-            // exact
-            path="/hr"
-            render={props =>
-              this.state.data["Account"] == 2 ? (
-                <DashboardHR
-                  data={this.state.data}
-                  onLogout={this.handleLogout}
-                />
-              ) : (
-                  <Redirect to="/login" />
-                )
-            }
-          />
-          <Route
-            // exact
-            path="/employee"
-            render={props =>
-              this.state.data["Account"] == 3 ? (
-                <DashboardEmployee
-                  data={this.state.data}
-                  onLogout={this.handleLogout}
-                />
-              ) : (
-                  <Redirect to="/login" />
-                )
-            }
-          />
-          {/* <Route path="/" render={() => <Redirect to="/login" />} />
-          <Route
-            render={() => (
-              //  <h1>Not Found app.JS</h1>
-              <Redirect to="/login" />
-            )}
-          /> */}
-          <Redirect to="/login" />
-        </Switch>
-      </Router >
-    );
-  }
-  handleSubmit = event => {
-    event.preventDefault();
-    // console.log("id", event.target[0].value);
-    this.setState({ pass: true });
-    this.setState({ loading: true });
-    this.login(event.target[0].value, event.target[1].value);
-    event.target.reset();
-  };
-  handleLogout = event => {
-    console.log("logout");
-    localStorage.clear();
-    this.componentDidMount();
-  };
-  login = (id, pass) => {
-    // history.push('new/path/here/');
+          >
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+              <Navbar />
+            </div>
+            <div>
+              {themeSettings && (<ThemeSettings />)}
 
-    // history.push('/page');
-    // History.push('/page');
-    // this.context.history.push('/path');
+              <Routes>
+                {/* dashboard  */}
+                <Route path="/" element={(<Ecommerce />)} />
+                <Route path="/ecommerce" element={(<Ecommerce />)} />
 
-    //email=admin@fenil.com&password=admin
+                {/* pages  */}
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/employees" element={<Employees />} />
+                <Route path="/customers" element={<Customers />} />
 
-    let bodyLogin = {
-      email: id,
-      password: pass
-    };
-    // let bodyLogin ="email="+id+"&password="+pass;
-    // {Email: id, Password: pass}
+                {/* apps  */}
+                <Route path="/kanban" element={<Kanban />} />
+                <Route path="/editor" element={<Editor />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/color-picker" element={<ColorPicker />} />
 
-    axios
-      .post(process.env.REACT_APP_API_URL + "/api/login", bodyLogin)
-      .then(res => {
-        // console.log(decodedData.Account);
-        console.log(jwt.decode(res.data));
-        var decodedData = jwt.decode(res.data);
-        localStorage.setItem("token", res.data);
+                {/* charts  */}
+                <Route path="/line" element={<Line />} />
+                <Route path="/area" element={<Area />} />
+                <Route path="/bar" element={<Bar />} />
+                <Route path="/pie" element={<Pie />} />
+                <Route path="/financial" element={<Financial />} />
+                <Route path="/color-mapping" element={<ColorMapping />} />
+                <Route path="/pyramid" element={<Pyramid />} />
+                <Route path="/stacked" element={<Stacked />} />
 
-        if (
-          (res == undefined ||
-            res == null ||
-            decodedData.Account == undefined ||
-            decodedData.Account == null) &&
-          !(
-            decodedData.Account == 1 ||
-            decodedData.Account == 2 ||
-            decodedData.Account == 3
-          )
-        ) {
-          this.setState({ pass: false });
-          this.setState({ loading: false });
-        } else {
-          if (decodedData.Account == 1) {
-            // this.setState({ data: decodedData });
-            // localStorage.setItem('data', JSON.stringfy(decodedData));
-
-            this.setState({ pass: true });
-            // localStorage.setItem('pass', 'true');
-
-            this.setState({ loading: false });
-            // localStorage.setItem('loading', 'false');
-
-            this.setState({ isLogin: true });
-            localStorage.setItem("isLogin", true);
-
-            // localStorage.setItem('isLogin', 'true');
-            localStorage.setItem("Account", 1);
-            localStorage.setItem("_id", decodedData["_id"]);
-            localStorage.setItem(
-              "Name",
-              decodedData["FirstName"] + " " + decodedData["LastName"]
-            );
-            this.componentDidMount();
-            history.push("#/admin/role");
-          }
-          if (decodedData.Account == 2) {
-            // this.setState({ data: decodedData });
-
-            this.setState({ pass: true });
-            this.setState({ loading: false });
-            this.setState({ isLogin: true });
-            localStorage.setItem("isLogin", true);
-
-            localStorage.setItem("Account", 2);
-            localStorage.setItem("_id", decodedData["_id"]);
-            localStorage.setItem(
-              "Name",
-              decodedData["FirstName"] + " " + decodedData["LastName"]
-            );
-            this.componentDidMount();
-
-            history.push("#/hr/employee");
-          }
-          if (decodedData.Account == 3) {
-            // this.setState({ data: decodedData });
-
-            this.setState({ pass: true });
-            this.setState({ loading: false });
-            this.setState({ isLogin: true });
-            localStorage.setItem("isLogin", true);
-
-            localStorage.setItem("Account", 3);
-            localStorage.setItem("_id", decodedData["_id"]);
-            localStorage.setItem(
-              "Name",
-              decodedData["FirstName"] + " " + decodedData["LastName"]
-            );
-            this.componentDidMount();
-
-            history.push("#/employee/" + decodedData._id + "/personal-info");
-          }
-        }
-
-        //  console.log(decodedData);
-        //  console.log(`decodedData.toString()=="false" `,decodedData.toString()=="false" );
-
-        //  if(decodedData.toString()=="false")
-
-        //  { console.log("1");
-        //  this.setState({ pass: false })
-        //  this.setState({ loading: false }); ;
-
-        // }else{
-        //   console.log("2");
-        //   this.setState({ pass: true });
-        //  this.setState({ loading: false });
-        //  this.setState({ data: decodedData});
-        //  this.setState({ isLogin: true });
-
-        // }
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ pass: false });
-        this.setState({ loading: false });
-      });
-
-  };
-}
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+        </div>
+      </BrowserRouter>
+    </div>
+  );
+};
 
 export default App;
