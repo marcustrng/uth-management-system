@@ -24,7 +24,7 @@ server:
 app:
   config:
     keycloak:
-      url: http://localhost:9300
+      url: http://localhost:9300/auth
       realm: uth-oidc-dev
       client-id: uth-client
 
