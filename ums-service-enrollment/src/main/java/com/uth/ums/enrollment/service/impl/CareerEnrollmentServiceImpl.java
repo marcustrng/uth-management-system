@@ -30,10 +30,10 @@ public class CareerEnrollmentServiceImpl implements CareerEnrollmentService {
         Optional<CareerEnrollment> optionalCareerEnrollment = careerEnrollmentRepository.findById(careerEnrollmentId);
         if (optionalCareerEnrollment.isPresent()) {
             CareerEnrollment careerEnrollment = optionalCareerEnrollment.get();
-            careerEnrollment.setStudentId(careerEnrollmentDTO.studentId());
-            careerEnrollment.setCareerId(careerEnrollmentDTO.careerId());
+            careerEnrollment.setStudentId(Long.valueOf(careerEnrollmentDTO.studentId()));
+            careerEnrollment.setCareerId(Long.valueOf(careerEnrollmentDTO.careerId()));
             careerEnrollment.setEnrollmentDate(careerEnrollmentDTO.enrollmentDate());
-            careerEnrollment.setCareerStatusId(careerEnrollmentDTO.careerStatusId());
+            careerEnrollment.setCareerStatusId(Long.valueOf(careerEnrollmentDTO.careerStatusId()));
             careerEnrollment.setCareerStatusDate(careerEnrollmentDTO.careerStatusDate());
             CareerEnrollment updatedCareerEnrollment = careerEnrollmentRepository.save(careerEnrollment);
             return CareerEnrollmentMapper.INSTANCE.toDTO(updatedCareerEnrollment);

@@ -1,3 +1,4 @@
+-- ums-service-enrollment
 INSERT INTO student (last_name, first_name, date_of_birth, email, phone_number)
 VALUES ('Doe', 'John', '1990-05-15', 'johndoe@example.com', '123-456-7890'),
        ('Smith', 'Jane', '1995-09-21', 'janesmith@example.com', '987-654-3210'),
@@ -14,14 +15,15 @@ VALUES ('Enrolled'),
        ('Finalized'),
        ('Drop Out');
 
-
 INSERT INTO career_enrollment (student_id, career_id, enrollment_date, career_status_id, career_status_date)
-VALUES
-  (2, 1, '2022-03-10', 1, '2022-03-15'),
-  (3, 2, '2022-04-20', 3, '2022-05-01');
+VALUES (1, 1, '2023-06-01', 1, '2023-06-01'),
+       (2, 1, '2023-06-01', 1, '2023-06-01'),
+       (3, 2, '2023-06-01', 3, '2023-06-01');
 
 INSERT INTO course_enrollment (student_id, course_occurrence_id, final_score)
 VALUES
-  (2, 1, 85.0),
-  (3, 2, 78.5),
-  (4, 3, 91.2);
+    (1, 1, 85.0),
+    (1, 2, 78.5),
+    (1, 3, 78.5),
+    (1, 4, 78.5),
+    (1, 5, 91.2);
