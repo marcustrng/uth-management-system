@@ -24,11 +24,6 @@ server:
 
 ## SECURITY BASED CONFIGURATIONS
 app:
-  config:
-    keycloak:
-      url: http://localhost:9300/auth
-      realm: uth-oidc-dev
-      client-id: uth-client
   cors:
     allowed-origins: http://localhost:3000
 
