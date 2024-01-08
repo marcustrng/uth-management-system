@@ -1,12 +1,24 @@
 package com.uth.ums.enrollment.feignclient.dto;
 
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record CourseDto(Long courseId, @NotBlank String courseName, @NotBlank String courseCode, CareerDto career, @NotNull Integer year, @NotNull Integer semester, boolean optative,
-                        Set<ProfessorCourseDto> professorCourses, ProfessorDto professor) implements
-		Serializable {
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CourseDto implements Serializable {
+
+	Long courseId;
+	String courseName;
+	String courseCode;
+	Integer year;
+	Integer semester;
+	ProfessorDto professor;
+
+	CourseOccurrenceDto courseOccurrenceDto;
 }

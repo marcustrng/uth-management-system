@@ -1,13 +1,23 @@
 package com.uth.ums.enrollment.feignclient.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record CareerDto(Long careerId, @NotBlank String careerName, DepartmentDto department,
-                        @Min(0) Integer durationYears, Integer requiredOptativeCourses,
-                        CareerLevelDto careerLevel, Set<CourseDto> courses) implements
-		Serializable {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CareerDto implements Serializable {
 
+	Long careerId;
+	String careerName;
+	DepartmentDto department;
+	Integer durationYears;
+	Integer requiredOptativeCourses;
+	CareerLevelDto careerLevel;
+	private Set<CourseDto> courses;
 }

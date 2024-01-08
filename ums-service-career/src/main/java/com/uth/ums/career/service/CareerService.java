@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CareerService {
+
 	List<Career> getAllCareers();
 
 	CareerDto getCareerById(Long id);
@@ -13,4 +14,6 @@ public interface CareerService {
 	Career saveCareer(Career career);
 
 	void deleteCareer(Long id);
+
+	CareerDto getCareerByIdAndSemester(Long id, int semester);
 }

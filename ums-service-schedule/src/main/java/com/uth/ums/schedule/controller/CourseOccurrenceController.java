@@ -80,7 +80,7 @@ public class CourseOccurrenceController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping("")
+	@GetMapping("/courses")
 	public ResponseEntity<CourseOccurrenceDto> getCourseOccurrenceByCourseId(@RequestParam Long courseId) {
 		CourseOccurrence courseOccurrence = courseOccurrenceService.getCourseOccurrenceByCourseId(courseId);
 		if (courseOccurrence == null) {

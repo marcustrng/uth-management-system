@@ -65,4 +65,14 @@ public class CareerController {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
 //	}
+
+//	@GetMapping("/{id}/{semester}")
+//	public ResponseEntity<CareerDto> getCareerByIdAndSemester(@PathVariable Long id, @PathVariable int semester) {
+//		CareerDto careerDto = careerService.getCareerByIdAndSemester(id, semester);
+//		if (careerDto != null) {
+//			return ResponseEntity.ok(careerDto);
+//		}
+//		return ResponseEntity.notFound().build();
+//	}
+
 }

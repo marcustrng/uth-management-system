@@ -1,6 +1,7 @@
 package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,5 @@ public class Career {
 	private CareerLevel careerLevel;
 
 	@OneToMany(mappedBy = "career")
-	private Set<Course> courses;
+	private List<Course> courses;
 }

@@ -1,8 +1,13 @@
 package com.uth.ums.enrollment.feignclient.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import lombok.Value;
 
-public record DepartmentDto(Long departmentId, @NotBlank String departmentName) implements
-		Serializable {
+@Value
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class DepartmentDto implements Serializable {
+
+	Long departmentId;
+	String departmentName;
 }
