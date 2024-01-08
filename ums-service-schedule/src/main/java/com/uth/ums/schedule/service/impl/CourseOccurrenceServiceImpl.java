@@ -9,35 +9,42 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CourseOccurrenceServiceImpl implements CourseOccurrenceService {
-    private final CourseOccurrenceRepository courseOccurrenceRepository;
 
-    public CourseOccurrenceServiceImpl(CourseOccurrenceRepository courseOccurrenceRepository) {
-        this.courseOccurrenceRepository = courseOccurrenceRepository;
-    }
+	private final CourseOccurrenceRepository courseOccurrenceRepository;
 
-    @Override
-    public List<CourseOccurrence> getAllCourseOccurrences() {
-        return courseOccurrenceRepository.findAll();
-    }
+	public CourseOccurrenceServiceImpl(CourseOccurrenceRepository courseOccurrenceRepository) {
+		this.courseOccurrenceRepository = courseOccurrenceRepository;
+	}
 
-    @Override
-    public CourseOccurrence getCourseOccurrenceById(Long courseOccurrenceId) {
-        Optional<CourseOccurrence> optionalCourseOccurrence = courseOccurrenceRepository.findById(courseOccurrenceId);
-        return optionalCourseOccurrence.orElse(null);
-    }
+	@Override
+	public List<CourseOccurrence> getAllCourseOccurrences() {
+		return courseOccurrenceRepository.findAll();
+	}
 
-    @Override
-    public CourseOccurrence createCourseOccurrence(CourseOccurrence courseOccurrence) {
-        return courseOccurrenceRepository.save(courseOccurrence);
-    }
+	@Override
+	public CourseOccurrence getCourseOccurrenceById(Long courseOccurrenceId) {
+		Optional<CourseOccurrence> optionalCourseOccurrence = courseOccurrenceRepository.findById(courseOccurrenceId);
+		return optionalCourseOccurrence.orElse(null);
+	}
 
-    @Override
-    public CourseOccurrence updateCourseOccurrence(CourseOccurrence courseOccurrence) {
-        return courseOccurrenceRepository.save(courseOccurrence);
-    }
+	@Override
+	public CourseOccurrence createCourseOccurrence(CourseOccurrence courseOccurrence) {
+		return courseOccurrenceRepository.save(courseOccurrence);
+	}
 
-    @Override
-    public void deleteCourseOccurrence(Long courseOccurrenceId) {
-        courseOccurrenceRepository.deleteById(courseOccurrenceId);
-    }
+	@Override
+	public CourseOccurrence updateCourseOccurrence(CourseOccurrence courseOccurrence) {
+		return courseOccurrenceRepository.save(courseOccurrence);
+	}
+
+	@Override
+	public void deleteCourseOccurrence(Long courseOccurrenceId) {
+		courseOccurrenceRepository.deleteById(courseOccurrenceId);
+	}
+
+	@Override
+	public CourseOccurrence getCourseOccurrenceByCourseId(Long courseId) {
+		Optional<CourseOccurrence> optionalCourseOccurrence = courseOccurrenceRepository.findByCourseId(courseId);
+		return optionalCourseOccurrence.orElse(null);
+	}
 }

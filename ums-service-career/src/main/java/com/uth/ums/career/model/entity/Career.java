@@ -1,6 +1,7 @@
 package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
+import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Career {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "career_id")
@@ -34,4 +36,7 @@ public class Career {
 	@ManyToOne
 	@JoinColumn(name = "career_level_id")
 	private CareerLevel careerLevel;
+
+	@OneToMany(mappedBy = "career")
+	private Set<Course> courses;
 }

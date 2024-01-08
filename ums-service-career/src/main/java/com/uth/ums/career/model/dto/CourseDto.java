@@ -1,14 +1,21 @@
 package com.uth.ums.career.model.dto;
 
-import com.uth.ums.career.model.dto.CareerDto;
-import com.uth.ums.career.model.entity.Course;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.Set;
+import lombok.Value;
 
 /**
- * DTO for {@link Course}
+ * DTO for {@link com.uth.ums.career.model.entity.Course}
  */
-public record CourseDto(Long courseId, @NotBlank String courseName, @NotBlank String courseCode, CareerDto career, @NotNull Integer year, @NotNull Integer semester, boolean optative) implements
-		Serializable {
+@Value
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CourseDto implements Serializable {
+
+	Long courseId;
+	String courseName;
+	String courseCode;
+	Integer year;
+	Integer semester;
+	ProfessorDto professor;
 }

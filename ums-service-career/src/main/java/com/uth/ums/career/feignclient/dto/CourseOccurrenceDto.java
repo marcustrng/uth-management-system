@@ -1,11 +1,10 @@
-package com.uth.ums.schedule.model.dto;
+package com.uth.ums.career.feignclient.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-/** DTO for {@link com.uth.ums.schedule.model.entity.CourseOccurrence} */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record CourseOccurrenceDto(
 		Long courseOccurrenceId,

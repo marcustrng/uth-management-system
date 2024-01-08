@@ -1,11 +1,22 @@
 package com.uth.ums.enrollment.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.uth.ums.enrollment.model.entity.EvaluationType;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
-/** DTO for {@link EvaluationType} */
+/**
+ * DTO for {@link com.uth.ums.enrollment.model.entity.EvaluationType}
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record EvaluationTypeDto(
-    Long evaluationTypeId, String evaluationTypeName, boolean groupActivity)
-    implements Serializable {}
+public class EvaluationTypeDto implements Serializable {
+
+	Long evaluationTypeId;
+	String evaluationTypeName;
+	boolean groupActivity;
+}

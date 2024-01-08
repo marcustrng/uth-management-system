@@ -1,5 +1,6 @@
 package com.uth.ums.career.controller;
 
+import com.uth.ums.career.model.dto.CareerDto;
 import com.uth.ums.career.model.entity.Career;
 import com.uth.ums.career.service.CareerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/careers")
 public class CareerController {
+
 	private final CareerService careerService;
 
 	@Autowired
@@ -27,10 +29,12 @@ public class CareerController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Career> getCareerById(@PathVariable Long id) {
-		Optional<Career> career = careerService.getCareerById(id);
-		return career.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	public ResponseEntity<CareerDto> getCareerById(@PathVariable Long id) {
+		CareerDto careerDto = careerService.getCareerById(id);
+		if (careerDto != null) {
+			return ResponseEntity.ok(careerDto);
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
@@ -39,26 +43,26 @@ public class CareerController {
 		return new ResponseEntity<>(createdCareer, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Career> updateCareer(@PathVariable Long id, @RequestBody Career career) {
-		Optional<Career> existingCareer = careerService.getCareerById(id);
-		if (existingCareer.isPresent()) {
-			career.setCareerId(id);
-			Career updatedCareer = careerService.saveCareer(career);
-			return new ResponseEntity<>(updatedCareer, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteCareer(@PathVariable Long id) {
-		Optional<Career> existingCareer = careerService.getCareerById(id);
-		if (existingCareer.isPresent()) {
-			careerService.deleteCareer(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Career> updateCareer(@PathVariable Long id, @RequestBody Career career) {
+//		Optional<Career> existingCareer = careerService.getCareerById(id);
+//		if (existingCareer.isPresent()) {
+//			career.setCareerId(id);
+//			Career updatedCareer = careerService.saveCareer(career);
+//			return new ResponseEntity<>(updatedCareer, HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//	}
+//
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Void> deleteCareer(@PathVariable Long id) {
+//		Optional<Career> existingCareer = careerService.getCareerById(id);
+//		if (existingCareer.isPresent()) {
+//			careerService.deleteCareer(id);
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//		} else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//	}
 }

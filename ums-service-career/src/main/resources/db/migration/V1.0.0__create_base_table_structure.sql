@@ -20,25 +20,6 @@ CREATE TABLE careers
     career_level_id           INT REFERENCES career_levels (career_level_id)
 );
 
-CREATE TABLE courses
-(
-    course_id   SERIAL PRIMARY KEY,
-    course_name VARCHAR(100) NOT NULL,
-    course_code VARCHAR(20)  NOT NULL,
-    career_id   INT REFERENCES careers (career_id),
-    year        INT,
-    semester    INT,
-    optional    BOOLEAN
-);
-
--- Create the CourseDependency table
-CREATE TABLE course_dependency
-(
-    course_id          INT REFERENCES courses (course_id),
-    required_course_id INT REFERENCES courses (course_id),
-    PRIMARY KEY (course_id, required_course_id)
-);
-
 -- Create the Professor table
 CREATE TABLE professors
 (
@@ -49,10 +30,32 @@ CREATE TABLE professors
     phone_number VARCHAR(20)
 );
 
--- Create the ProfessorCourse table
-CREATE TABLE professor_course
+CREATE TABLE courses
 (
-    professor_id INT REFERENCES professors (professor_id),
-    course_id    INT REFERENCES courses (course_id),
-    PRIMARY KEY (professor_id, course_id)
+    course_id    SERIAL PRIMARY KEY,
+    course_name  VARCHAR(100) NOT NULL,
+    course_code  VARCHAR(20)  NOT NULL,
+    career_id    INT REFERENCES careers (career_id),
+    year         INT,
+    semester     INT,
+    optional     BOOLEAN,
+    professor_id INT REFERENCES professors (professor_id)
 );
+
+-- Create the CourseDependency table
+-- CREATE TABLE course_dependency
+-- (
+--     course_id          INT REFERENCES courses (course_id),
+--     required_course_id INT REFERENCES courses (course_id),
+--     PRIMARY KEY (course_id, required_course_id)
+-- );
+
+
+
+-- Create the ProfessorCourse table
+-- CREATE TABLE professor_course
+-- (
+--     professor_id INT REFERENCES professors (professor_id),
+--     course_id    INT REFERENCES courses (course_id),
+--     PRIMARY KEY (professor_id, course_id)
+-- );

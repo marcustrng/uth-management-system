@@ -10,9 +10,8 @@ import org.mapstruct.factory.Mappers;
 public interface CourseMapper {
 	CourseMapper INSTANCE = Mappers.getMapper(CourseMapper.class);
 
-	@Mapping(source = "career", target = "career")
 	CourseDto toDto(Course course);
 
-	@Mapping(source = "career", target = "career")
+	@Mapping(target = "career", ignore = true)
 	Course toEntity(CourseDto courseDto);
 }

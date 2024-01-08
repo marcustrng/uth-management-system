@@ -2,10 +2,12 @@ package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Entity
 @Table(name = "professors")
 @Getter
@@ -13,6 +15,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Professor {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "professor_id")
@@ -29,4 +32,7 @@ public class Professor {
 
 	@Column(name = "phone_number")
 	private String phoneNumber;
+
+    @OneToMany(mappedBy="professor")
+	private Set<Course> courses;
 }

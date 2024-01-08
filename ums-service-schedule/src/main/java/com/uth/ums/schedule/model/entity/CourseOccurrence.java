@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,29 +23,33 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class CourseOccurrence {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_occurrence_id")
-    private Long courseOccurrenceId;
 
-    @Column(name = "course_id")
-    private Integer courseId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "course_occurrence_id")
+	private Long courseOccurrenceId;
 
-    @Column(name = "occurrence_year")
-    private Integer occurrenceYear;
+	@Column(name = "course_id")
+	private Long courseId;
 
-    @Column(name = "course_occurrence_code", length = 255)
-    private String courseOccurrenceCode;
+	@Column(name = "occurrence_year")
+	private Integer occurrenceYear;
 
-    @Column(name = "professor_id")
-    private Integer professorId;
+	@Column(name = "course_occurrence_code", length = 255)
+	private String courseOccurrenceCode;
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
+	@Column(name = "professor_id")
+	private Integer professorId;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+	@Column(name = "start_date")
+	private LocalDate startDate;
 
-    @Column(name = "capacity")
-    private Integer capacity;
+	@Column(name = "end_date")
+	private LocalDate endDate;
+
+	@Column(name = "capacity")
+	private Integer capacity;
+
+	@OneToMany(mappedBy = "courseOccurrence")
+	private Set<Schedule> schedules;
 }

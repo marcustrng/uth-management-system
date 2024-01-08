@@ -1,6 +1,10 @@
 package com.uth.ums.keycloak.security;
 
-import lombok.NonNull;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -12,12 +16,6 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 @RequiredArgsConstructor
 @Component
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
@@ -27,7 +25,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     private final JwtAuthConverterProperties properties;
 
     @Override
-    public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
+    public AbstractAuthenticationToken convert(Jwt jwt) {
         Collection<GrantedAuthority> authorities =
                 Stream.concat(jwtGrantedAuthoritiesConverter.convert(jwt).stream(), extractResourceRoles(jwt).stream()).collect(Collectors.toSet());
         String claimName = properties.getPrincipalAttribute() == null ? JwtClaimNames.SUB : properties.getPrincipalAttribute();
@@ -39,7 +37,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         Map<String, Object> resource;
         Collection<String> resourceRoles;
         if (resourceAccess == null
-                || (resource = (Map<String, Object>) resourceAccess.get(properties.getClientID())) == null
+                || (resource = (Map<String, Object>) resourceAccess.get(properties.getResourceId())) == null
                 || (resourceRoles = (Collection<String>) resource.get("roles")) == null) {
             return Set.of();
         }

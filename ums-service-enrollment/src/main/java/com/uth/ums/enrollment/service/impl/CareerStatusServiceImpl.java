@@ -23,7 +23,7 @@ public class CareerStatusServiceImpl implements CareerStatusService {
   @Override
   public CareerStatusDto createCareerStatus(CareerStatusDto careerStatusDTO) {
     CareerStatus careerStatus = new CareerStatus();
-    careerStatus.setCareerStatusName(careerStatusDTO.careerStatusName());
+    careerStatus.setCareerStatusName(careerStatusDTO.getCareerStatusName());
     CareerStatus savedCareerStatus = careerStatusRepository.save(careerStatus);
     return CareerStatusMapper.INSTANCE.toDto(savedCareerStatus);
   }
@@ -33,7 +33,7 @@ public class CareerStatusServiceImpl implements CareerStatusService {
     Optional<CareerStatus> optionalCareerStatus = careerStatusRepository.findById(careerStatusId);
     if (optionalCareerStatus.isPresent()) {
       CareerStatus careerStatus = optionalCareerStatus.get();
-      careerStatus.setCareerStatusName(careerStatusDTO.careerStatusName());
+      careerStatus.setCareerStatusName(careerStatusDTO.getCareerStatusName());
       CareerStatus updatedCareerStatus = careerStatusRepository.save(careerStatus);
       return CareerStatusMapper.INSTANCE.toDto(updatedCareerStatus);
     } else {

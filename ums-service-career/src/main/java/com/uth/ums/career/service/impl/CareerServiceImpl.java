@@ -1,8 +1,11 @@
 package com.uth.ums.career.service.impl;
 
+import com.uth.ums.career.model.dto.CareerDto;
 import com.uth.ums.career.model.entity.Career;
+import com.uth.ums.career.model.mapper.CareerMapper;
 import com.uth.ums.career.repository.CareerRepository;
 import com.uth.ums.career.service.CareerService;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +27,10 @@ public class CareerServiceImpl implements CareerService {
 	}
 
 	@Override
-	public Optional<Career> getCareerById(Long id) {
-		return careerRepository.findById(id);
-	}
+	public CareerDto getCareerById(Long id) {
+		Optional<Career> optionalCareer = careerRepository.findById(id);
+
+		return optionalCareer.map(CareerMapper.INSTANCE::toDto).orElse(new CareerDto());	}
 
 	@Override
 	public Career saveCareer(Career career) {

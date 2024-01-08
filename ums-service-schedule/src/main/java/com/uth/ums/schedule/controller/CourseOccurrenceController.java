@@ -13,69 +13,80 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/course-occurrences")
 public class CourseOccurrenceController {
-  private final CourseOccurrenceService courseOccurrenceService;
 
-  public CourseOccurrenceController(CourseOccurrenceService courseOccurrenceService) {
-    this.courseOccurrenceService = courseOccurrenceService;
-  }
+	private final CourseOccurrenceService courseOccurrenceService;
 
-  @GetMapping
-  public ResponseEntity<List<CourseOccurrenceDto>> getAllCourseOccurrences() {
-    List<CourseOccurrence> courseOccurrences = courseOccurrenceService.getAllCourseOccurrences();
-    List<CourseOccurrenceDto> dtoList =
-        courseOccurrences.stream()
-            .map(CourseOccurrenceMapper.INSTANCE::toDto)
-            .collect(Collectors.toList());
-    return ResponseEntity.ok(dtoList);
-  }
+	public CourseOccurrenceController(CourseOccurrenceService courseOccurrenceService) {
+		this.courseOccurrenceService = courseOccurrenceService;
+	}
 
-  @GetMapping("/{id}")
-  public ResponseEntity<CourseOccurrenceDto> getCourseOccurrenceById(
-      @PathVariable("id") Long courseOccurrenceId) {
-    CourseOccurrence courseOccurrence =
-        courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
-    if (courseOccurrence == null) {
-      return ResponseEntity.notFound().build();
-    }
-    CourseOccurrenceDto dto = CourseOccurrenceMapper.INSTANCE.toDto(courseOccurrence);
-    return ResponseEntity.ok(dto);
-  }
+	@GetMapping
+	public ResponseEntity<List<CourseOccurrenceDto>> getAllCourseOccurrences() {
+		List<CourseOccurrence> courseOccurrences = courseOccurrenceService.getAllCourseOccurrences();
+		List<CourseOccurrenceDto> dtoList =
+				courseOccurrences.stream()
+						.map(CourseOccurrenceMapper.INSTANCE::toDto)
+						.collect(Collectors.toList());
+		return ResponseEntity.ok(dtoList);
+	}
 
-  @PostMapping
-  public ResponseEntity<CourseOccurrenceDto> createCourseOccurrence(
-      @RequestBody CourseOccurrenceDto courseOccurrenceDTO) {
-    CourseOccurrence courseOccurrence = CourseOccurrenceMapper.INSTANCE.toEntity(courseOccurrenceDTO);
-    CourseOccurrence createdCourseOccurrence =
-        courseOccurrenceService.createCourseOccurrence(courseOccurrence);
-    CourseOccurrenceDto createdDTO = CourseOccurrenceMapper.INSTANCE.toDto(createdCourseOccurrence);
-    return ResponseEntity.status(HttpStatus.CREATED).body(createdDTO);
-  }
+	@GetMapping("/{id}")
+	public ResponseEntity<CourseOccurrenceDto> getCourseOccurrenceById(
+			@PathVariable("id") Long courseOccurrenceId) {
+		CourseOccurrence courseOccurrence =
+				courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
+		if (courseOccurrence == null) {
+			return ResponseEntity.notFound().build();
+		}
+		CourseOccurrenceDto dto = CourseOccurrenceMapper.INSTANCE.toDto(courseOccurrence);
+		return ResponseEntity.ok(dto);
+	}
 
-  @PutMapping("/{id}")
-  public ResponseEntity<CourseOccurrenceDto> updateCourseOccurrence(
-      @PathVariable("id") Long courseOccurrenceId,
-      @RequestBody CourseOccurrenceDto courseOccurrenceDTO) {
-    CourseOccurrence existingCourseOccurrence =
-        courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
-    if (existingCourseOccurrence == null) {
-      return ResponseEntity.notFound().build();
-    }
-    CourseOccurrence updatedCourseOccurrence = CourseOccurrenceMapper.INSTANCE.toEntity(courseOccurrenceDTO);
-    updatedCourseOccurrence.setCourseOccurrenceId(existingCourseOccurrence.getCourseOccurrenceId());
-    CourseOccurrence savedCourseOccurrence =
-        courseOccurrenceService.updateCourseOccurrence(updatedCourseOccurrence);
-    CourseOccurrenceDto savedDTO = CourseOccurrenceMapper.INSTANCE.toDto(savedCourseOccurrence);
-    return ResponseEntity.ok(savedDTO);
-  }
+	@PostMapping
+	public ResponseEntity<CourseOccurrenceDto> createCourseOccurrence(
+			@RequestBody CourseOccurrenceDto courseOccurrenceDTO) {
+		CourseOccurrence courseOccurrence = CourseOccurrenceMapper.INSTANCE.toEntity(courseOccurrenceDTO);
+		CourseOccurrence createdCourseOccurrence =
+				courseOccurrenceService.createCourseOccurrence(courseOccurrence);
+		CourseOccurrenceDto createdDTO = CourseOccurrenceMapper.INSTANCE.toDto(createdCourseOccurrence);
+		return ResponseEntity.status(HttpStatus.CREATED).body(createdDTO);
+	}
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteCourseOccurrence(@PathVariable("id") Long courseOccurrenceId) {
-    CourseOccurrence courseOccurrence =
-        courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
-    if (courseOccurrence == null) {
-      return ResponseEntity.notFound().build();
-    }
-    courseOccurrenceService.deleteCourseOccurrence(courseOccurrenceId);
-    return ResponseEntity.noContent().build();
-  }
+	@PutMapping("/{id}")
+	public ResponseEntity<CourseOccurrenceDto> updateCourseOccurrence(
+			@PathVariable("id") Long courseOccurrenceId,
+			@RequestBody CourseOccurrenceDto courseOccurrenceDTO) {
+		CourseOccurrence existingCourseOccurrence =
+				courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
+		if (existingCourseOccurrence == null) {
+			return ResponseEntity.notFound().build();
+		}
+		CourseOccurrence updatedCourseOccurrence = CourseOccurrenceMapper.INSTANCE.toEntity(courseOccurrenceDTO);
+		updatedCourseOccurrence.setCourseOccurrenceId(existingCourseOccurrence.getCourseOccurrenceId());
+		CourseOccurrence savedCourseOccurrence =
+				courseOccurrenceService.updateCourseOccurrence(updatedCourseOccurrence);
+		CourseOccurrenceDto savedDTO = CourseOccurrenceMapper.INSTANCE.toDto(savedCourseOccurrence);
+		return ResponseEntity.ok(savedDTO);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteCourseOccurrence(@PathVariable("id") Long courseOccurrenceId) {
+		CourseOccurrence courseOccurrence =
+				courseOccurrenceService.getCourseOccurrenceById(courseOccurrenceId);
+		if (courseOccurrence == null) {
+			return ResponseEntity.notFound().build();
+		}
+		courseOccurrenceService.deleteCourseOccurrence(courseOccurrenceId);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("")
+	public ResponseEntity<CourseOccurrenceDto> getCourseOccurrenceByCourseId(@RequestParam Long courseId) {
+		CourseOccurrence courseOccurrence = courseOccurrenceService.getCourseOccurrenceByCourseId(courseId);
+		if (courseOccurrence == null) {
+			return ResponseEntity.notFound().build();
+		}
+		CourseOccurrenceDto dto = CourseOccurrenceMapper.INSTANCE.toDto(courseOccurrence);
+		return ResponseEntity.ok(dto);
+	}
 }

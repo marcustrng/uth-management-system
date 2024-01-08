@@ -4,13 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
-/** DTO for {@link com.uth.ums.enrollment.model.entity.CourseEnrollmentEvaluation} */
+/**
+ * DTO for {@link com.uth.ums.enrollment.model.entity.CourseEnrollmentEvaluation}
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record CourseEnrollmentEvaluationDto(
-    Long courseEnrollmentEvaluationId,
-    CourseEnrollmentDto courseEnrollment,
-    EvaluationTypeDto evaluationType,
-    LocalDate evaluationDate,
-    BigDecimal score)
-    implements Serializable {}
+public class CourseEnrollmentEvaluationDto implements Serializable {
+
+	Long courseEnrollmentEvaluationId;
+	EvaluationTypeDto evaluationType;
+	LocalDate evaluationDate;
+	BigDecimal score;
+}

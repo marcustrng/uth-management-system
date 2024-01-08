@@ -1,7 +1,7 @@
 package com.uth.ums.enrollment.service.impl;
 
-import com.uth.ums.enrollment.model.entity.EvaluationType;
 import com.uth.ums.enrollment.model.dto.EvaluationTypeDto;
+import com.uth.ums.enrollment.model.entity.EvaluationType;
 import com.uth.ums.enrollment.model.mapper.EvaluationTypeMapper;
 import com.uth.ums.enrollment.repository.EvaluationTypeRepository;
 import com.uth.ums.enrollment.service.EvaluationTypeService;
@@ -30,8 +30,8 @@ public class EvaluationTypeServiceImpl implements EvaluationTypeService {
         evaluationTypeRepository.findById(evaluationTypeId);
     if (optionalEvaluationType.isPresent()) {
       EvaluationType evaluationType = optionalEvaluationType.get();
-      evaluationType.setEvaluationTypeName(evaluationTypeDTO.evaluationTypeName());
-      evaluationType.setGroupActivity(evaluationTypeDTO.groupActivity());
+      evaluationType.setEvaluationTypeName(evaluationTypeDTO.getEvaluationTypeName());
+      evaluationType.setGroupActivity(evaluationTypeDTO.isGroupActivity());
       EvaluationType updatedEvaluationType = evaluationTypeRepository.save(evaluationType);
       return EvaluationTypeMapper.INSTANCE.toDTO(updatedEvaluationType);
     }

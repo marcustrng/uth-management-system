@@ -17,6 +17,13 @@ spring:
             - Path=/students/**
           filters:
             - StripPrefix=1
+        ## PLANNING SERVICE
+        - id: ums-service-schedule
+          uri: lb://ums-service-schedule
+          predicates:
+            - Path=/schedules/**
+          filters:
+            - StripPrefix=1
 
 server:
   port: 8080

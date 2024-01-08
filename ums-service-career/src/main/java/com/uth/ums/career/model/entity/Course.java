@@ -1,6 +1,7 @@
 package com.uth.ums.career.model.entity;
 
 import jakarta.persistence.*;
+import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Course {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_id")
@@ -34,6 +36,7 @@ public class Course {
 	@Column(name = "semester")
 	private Integer semester;
 
-	@Column(name = "optative")
-	private boolean optative;
+    @ManyToOne
+    @JoinColumn(name="professor_id", nullable=false)
+	private Professor professor;
 }

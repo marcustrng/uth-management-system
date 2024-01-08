@@ -1,88 +1,17 @@
+-- ums-service-career
 INSERT INTO career_levels (career_level_name)
-VALUES ('Undergraduate'),
-       ('Graduate'),
-       ('PhD');
+VALUES ('Bachelor''s degree'),
+       ('College diploma'),
+       ('Master''s degree');
 
 INSERT INTO departments (department_name)
-VALUES ('Science'),
-       ('Literature'),
-       ('Engineering');
+VALUES ('Information Technology'),
+       ('Economics');
 
 INSERT INTO careers (career_name, department_id, duration_years, required_optional_courses,
                      career_level_id)
-VALUES ('Mechanical Engineering', 3, 4, 4, 1),
-       ('Psychology', 2, 5, 6, 1),
-       ('Computer Science', 1, 4, 3, 2),
-       ('Chemistry', 1, 3, 2, 2);
-
-INSERT INTO courses (course_name, course_code, career_id, year, semester, optional)
-VALUES ('Mathematics 1', 'MAT-1', 1, 1, 1, false),
-       ('Mathematics 2', 'MAT-2', 1, 2, 1, false),
-       ('Physics 1', 'PHY-1', 1, 1, 2, false),
-       ('Physics 2', 'PHY-2', 1, 2, 2, false),
-       ('Introduction to Psychology', 'PSY-1', 2, 1, 1, false),
-       ('Advanced Psychology', 'PSY-2', 2, 2, 1, false),
-       ('Computer Programming', 'CSC-1', 3, 1, 1, false),
-       ('Database Management', 'CSC-2', 3, 2, 1, false),
-       ('Organic Chemistry', 'CHM-1', 4, 1, 1, false),
-       ('Inorganic Chemistry', 'CHM-2', 4, 2, 1, false),
-       ('Literature 1', 'LIT-1', 2, 1, 1, false),
-       ('Literature 2', 'LIT-2', 2, 2, 1, false),
-       ('Mechanics', 'MEC-1', 1, 3, 1, false),
-       ('Thermodynamics', 'MEC-2', 1, 4, 1, false),
-       ('Database Design', 'CSC-3', 3, 3, 1, false),
-       ('Web Development', 'CSC-4', 3, 4, 1, false),
-       ('Analytical Chemistry', 'CHM-3', 4, 3, 1, false),
-       ('Physical Chemistry', 'CHM-4', 4, 4, 1, false),
-       ('Introduction to Biology', 'BIO-101', 1, 1, 1, false),
-       ('Cell Biology', 'BIO-201', 1, 2, 1, false),
-       ('Genetics', 'BIO-301', 1, 3, 1, false),
-       ('Molecular Biology', 'BIO-401', 1, 4, 1, false),
-       ('English Literature', 'LIT-101', 2, 1, 1, false),
-       ('World Literature', 'LIT-201', 2, 2, 1, false),
-       ('American Literature', 'LIT-301', 2, 3, 1, false),
-       ('Shakespearean Literature', 'LIT-401', 2, 4, 1, false),
-       ('Introduction to Computer Science', 'CSC-101', 3, 1, 1, false),
-       ('Data Structures and Algorithms', 'CSC-201', 3, 2, 1, false),
-       ('Operating Systems', 'CSC-301', 3, 3, 1, false),
-       ('Artificial Intelligence', 'CSC-401', 3, 4, 1, false),
-       ('Organic Chemistry 1', 'CHM-101', 4, 1, 1, false),
-       ('Inorganic Chemistry 1', 'CHM-201', 4, 2, 1, false),
-       ('Analytical Chemistry', 'CHM-301', 4, 3, 1, false),
-       ('Physical Chemistry', 'CHM-401', 4, 4, 1, false),
-       ('Introduction to Economics', 'ECO-101', 1, 1, 1, false),
-       ('Microeconomics', 'ECO-201', 1, 2, 1, false),
-       ('Macroeconomics', 'ECO-301', 1, 3, 1, false),
-       ('International Economics', 'ECO-401', 1, 4, 1, false),
-       ('Creative Writing', 'LIT-101', 2, 1, 1, false),
-       ('Poetry Writing', 'LIT-201', 2, 2, 1, false),
-       ('Fiction Writing', 'LIT-301', 2, 3, 1, false),
-       ('Playwriting', 'LIT-401', 2, 4, 1, false),
-       ('Introduction to Computer Programming', 'CSC-101', 3, 1, 1, false),
-       ('Data Structures', 'CSC-201', 3, 2, 1, false),
-       ('Software Engineering', 'CSC-301', 3, 3, 1, false),
-       ('Machine Learning', 'CSC-401', 3, 4, 1, false),
-       ('Organic Chemistry 1', 'CHM-101', 4, 1, 1, false),
-       ('Inorganic Chemistry 1', 'CHM-201', 4, 2, 1, false),
-       ('Biochemistry', 'CHM-301', 4, 3, 1, false),
-       ('Physical Chemistry', 'CHM-401', 4, 4, 1, false);
-
-INSERT INTO course_dependency (course_id, required_course_id)
-VALUES (1, 2),
-       (3, 4),
-       (5, 6),
-       (7, 8),
-       (9, 10),
-       (11, 12),
-       (13, 14),
-       (15, 16),
-       (2, 3),
-       (4, 5),
-       (6, 7),
-       (8, 9),
-       (10, 11),
-       (12, 13),
-       (14, 15);
+VALUES ('Information Technology', 1, 4, 30, 1),
+       ('Economics', 2, 2, 20, 3);
 
 INSERT INTO professors (first_name, last_name, email, phone_number)
 VALUES ('John', 'Smith', 'john.smith@example.com', '123-456-7890'),
@@ -102,14 +31,79 @@ VALUES ('John', 'Smith', 'john.smith@example.com', '123-456-7890'),
        ('Benjamin', 'Lopez', 'benjamin.lopez@example.com', '888-999-0000'),
        ('Olivia', 'Garcia', 'olivia.garcia@example.com', '111-222-3333');
 
-INSERT INTO professor_course (professor_id, course_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (2, 3),
-    (3, 1),
-    (3, 4),
-    (4, 2),
-    (5, 3),
-    (5, 4),
-    (6, 1);
+
+INSERT INTO courses (course_name, course_code, career_id, year, semester, optional, professor_id)
+--     IT year 1 semester 1
+VALUES ('Mathematics 1', 'MAT-1', 1, 1, 1, false, 1),
+       ('Mathematics 2', 'MAT-2', 1, 1, 1, false, 2),
+       ('Physics 1', 'PHY-1', 1, 1, 1, false, 3),
+       ('Physics 2', 'PHY-2', 1, 1, 1, false, 4),
+       ('Introduction to Psychology', 'PSY-1', 1, 1, 1, true, 5),
+--     IT year 1 semester 2
+       ('Advanced Psychology', 'PSY-2', 1, 1, 2, false, 6),
+       ('Computer Programming', 'CSC-1', 1, 1, 2, false, 7),
+       ('Database Management', 'CSC-2', 1, 1, 2, false, 8),
+       ('Organic Chemistry', 'CHM-1', 1, 1, 2, true, 9),
+       ('Inorganic Chemistry', 'CHM-2', 1, 1, 2, true, 10),
+       --     IT year 2 semester 1
+       ('Literature 1', 'LIT-1', 1, 2, 1, false, 11),
+       ('Literature 2', 'LIT-2', 1, 2, 1, false, 12),
+       ('Mechanics', 'MEC-1', 1, 2, 1, false, 13),
+       ('Thermodynamics', 'MEC-2', 1, 2, 1, true, 14),
+       --     IT year 2 semester 2
+       ('Database Design', 'CSC-3', 1, 2, 2, false, 15),
+       ('Web Development', 'CSC-4', 1, 2, 2, false, 16),
+       ('Analytical Chemistry', 'CHM-3', 1, 2, 2, false, 1),
+       ('Physical Chemistry', 'CHM-4', 1, 2, 2, false, 2),
+       --     IT year 3 semester 1
+       ('Introduction to Biology', 'BIO-101', 1, 3, 1, false, 3),
+       ('Cell Biology', 'BIO-201', 1, 3, 1, false, 4),
+       ('Genetics', 'BIO-301', 1, 3, 1, true, 5),
+       --     IT year 3 semester 2
+       ('Molecular Biology', 'BIO-401', 1, 3, 2, false, 6),
+       ('English Literature', 'LIT-101', 1, 3, 2, false, 7),
+       ('World Literature', 'LIT-201', 1, 3, 2, false, 8),
+       ('American Literature', 'LIT-301', 1, 3, 2, true, 9),
+       --     IT year 4 semester 1
+       ('Shakespearean Literature', 'LIT-401', 1, 4, 1, false, 10),
+       ('Introduction to Computer Science', 'CSC-101', 1, 4, 1, false, 11),
+       ('Data Structures and Algorithms', 'CSC-201', 1, 4, 1, false, 12),
+       --     IT year 4 semester 2
+       ('Operating Systems', 'CSC-301', 1, 4, 2, false, 13),
+       ('Artificial Intelligence', 'CSC-401', 1, 4, 2, false, 14),
+       ('Organic Chemistry 1', 'CHM-101', 1, 4, 2, false, 15),
+
+       --     Economics year 1 semester 1
+       ('Inorganic Chemistry 1', 'CHM-201', 2, 1, 1, false, 16),
+       ('Analytical Chemistry', 'CHM-301', 2, 1, 1, false, 1),
+       ('Physical Chemistry', 'CHM-401', 2, 1, 1, false, 2),
+       --     Economics year 1 semester 2
+       ('Introduction to Economics', 'ECO-101', 2, 1, 2, false, 3),
+       ('Microeconomics', 'ECO-201', 2, 1, 2, false, 4),
+       ('Macroeconomics', 'ECO-301', 2, 1, 2, false, 5),
+       ('International Economics', 'ECO-401', 2, 1, 2, false, 6),
+       --     Economics year 2 semester 1
+       ('Creative Writing', 'LIT-101', 2, 2, 1, false, 7),
+       ('Poetry Writing', 'LIT-201', 2, 2, 1, false, 8),
+       --     Economics year 2 semester 2
+       ('Fiction Writing', 'LIT-301', 2, 2, 2, false, 9),
+       ('Playwriting', 'LIT-401', 2, 2, 2, false, 10),
+       ('Introduction to Computer Programming', 'CSC-101', 2, 2, 2, false, 11),
+       ('Data Structures', 'CSC-201', 2, 2, 2, false, 12),
+       ('Software Engineering', 'CSC-301', 2, 2, 2, false, 13),
+       ('Machine Learning', 'CSC-401', 2, 2, 2, false, 14),
+       ('Organic Chemistry 1', 'CHM-101', 2, 2, 2, false, 15),
+       ('Inorganic Chemistry 1', 'CHM-201', 2, 2, 2, false, 16),
+       ('Biochemistry', 'CHM-301', 2, 2, 2, false, 1),
+       ('Physical Chemistry', 'CHM-401', 2, 2, 2, false, 2);
+
+-- INSERT INTO course_dependency (course_id, required_course_id)
+-- VALUES (35, 32),
+--        (5, 1);
+
+
+-- INSERT INTO professor_course (professor_id, course_id)
+-- SELECT (FLOOR(RANDOM() * 16) + 1) AS professor_id,
+--        course_id
+-- FROM generate_series(1, 50) AS course_id;
+

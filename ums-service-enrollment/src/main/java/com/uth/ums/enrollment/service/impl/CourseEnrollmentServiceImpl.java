@@ -1,11 +1,8 @@
 package com.uth.ums.enrollment.service.impl;
 
 import com.uth.ums.enrollment.exception.NotFoundException;
-import com.uth.ums.enrollment.model.dto.CareerEnrollmentDto;
 import com.uth.ums.enrollment.model.dto.CourseEnrollmentDto;
-import com.uth.ums.enrollment.model.entity.CareerEnrollment;
 import com.uth.ums.enrollment.model.entity.CourseEnrollment;
-import com.uth.ums.enrollment.model.mapper.CareerEnrollmentMapper;
 import com.uth.ums.enrollment.model.mapper.CourseEnrollmentMapper;
 import com.uth.ums.enrollment.repository.CourseEnrollmentRepository;
 import com.uth.ums.enrollment.service.CourseEnrollmentService;
@@ -32,10 +29,10 @@ public class CourseEnrollmentServiceImpl implements CourseEnrollmentService {
         Optional<CourseEnrollment> optionalCareerEnrollment = courseEnrollmentRepository.findById(careerEnrollmentId);
         if (optionalCareerEnrollment.isPresent()) {
             CourseEnrollment enrollment = optionalCareerEnrollment.get();
-            enrollment.setStudentId(careerEnrollmentDTO.studentId());
-            enrollment.setCourseEnrollmentId(careerEnrollmentDTO.courseEnrollmentId());
-            enrollment.setCourseOccurrenceId(careerEnrollmentDTO.courseOccurrenceId());
-            enrollment.setFinalScore(careerEnrollmentDTO.finalScore());
+            enrollment.setStudentId(careerEnrollmentDTO.getStudentId());
+            enrollment.setCourseEnrollmentId(careerEnrollmentDTO.getCourseEnrollmentId());
+            enrollment.setCourseOccurrenceId(careerEnrollmentDTO.getCourseOccurrenceId());
+            enrollment.setFinalScore(careerEnrollmentDTO.getFinalScore());
             CourseEnrollment updatedCareerEnrollment = courseEnrollmentRepository.save(enrollment);
             return CourseEnrollmentMapper.INSTANCE.toDTO(updatedCareerEnrollment);
         }

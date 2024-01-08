@@ -1,12 +1,20 @@
 package com.uth.ums.career.model.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.uth.ums.career.model.entity.Professor;
 import java.io.Serializable;
+import lombok.Value;
 
 /**
- * DTO for {@link com.uth.ums.career.model.entity.Professor}
+ * DTO for {@link Professor}
  */
-public record ProfessorDto(Long professorId, @NotBlank String firstName, @NotBlank String lastName, @Email @NotBlank String email, String phoneNumber) implements
-		Serializable {
+@Value
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProfessorDto implements Serializable {
+
+	Long professorId;
+	String firstName;
+	String lastName;
+	String email;
+	String phoneNumber;
 }

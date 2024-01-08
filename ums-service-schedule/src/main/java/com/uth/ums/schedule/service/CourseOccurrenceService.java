@@ -5,13 +5,16 @@ import com.uth.ums.schedule.model.entity.CourseOccurrence;
 import java.util.List;
 
 public interface CourseOccurrenceService {
-    List<CourseOccurrence> getAllCourseOccurrences();
 
-    CourseOccurrence getCourseOccurrenceById(Long courseOccurrenceId);
+	List<CourseOccurrence> getAllCourseOccurrences();
 
-    CourseOccurrence createCourseOccurrence(CourseOccurrence courseOccurrence);
+	CourseOccurrence getCourseOccurrenceById(Long courseOccurrenceId);
 
-    CourseOccurrence updateCourseOccurrence(CourseOccurrence courseOccurrence);
+	CourseOccurrence createCourseOccurrence(CourseOccurrence courseOccurrence);
 
-    void deleteCourseOccurrence(Long courseOccurrenceId);
+	CourseOccurrence updateCourseOccurrence(CourseOccurrence courseOccurrence);
+
+	void deleteCourseOccurrence(Long courseOccurrenceId);
+
+	CourseOccurrence getCourseOccurrenceByCourseId(Long courseId);
 }

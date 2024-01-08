@@ -1,10 +1,9 @@
-package com.uth.ums.schedule.model.dto;
+package com.uth.ums.career.feignclient.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/** DTO for {@link com.uth.ums.schedule.model.entity.Schedule} */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record ScheduleDto(
     Long scheduleId,

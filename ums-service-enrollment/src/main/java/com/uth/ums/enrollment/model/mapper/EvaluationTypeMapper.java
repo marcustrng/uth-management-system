@@ -1,7 +1,7 @@
 package com.uth.ums.enrollment.model.mapper;
 
-import com.uth.ums.enrollment.model.entity.EvaluationType;
 import com.uth.ums.enrollment.model.dto.EvaluationTypeDto;
+import com.uth.ums.enrollment.model.entity.EvaluationType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
