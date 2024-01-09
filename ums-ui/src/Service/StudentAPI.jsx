@@ -9,7 +9,7 @@ export const studentAPI = {
 function getUserProfile(token, username) {
   console.log("username", username);
 
-  return instance.get(`/students/students/${username}`, {
+  return instance.get(`/ums-service-enrollment/students/1`, {
     headers: {'Authorization': bearerAuth(token)}
   })
 }
