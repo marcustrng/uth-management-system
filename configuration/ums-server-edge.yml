@@ -2,6 +2,13 @@ spring:
   ## GATEWAY CONFIGURATIONS
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: '*'
+            allowedHeaders: '*'
+
       routes:
         ## CAREER SERVICE
         - id: ums-service-career
@@ -31,23 +38,9 @@ spring:
             - Path=/ums-connector-keycloak/**
           filters:
             - StripPrefix=1
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9300/realms/uth-oidc-dev
-  jwt:
-    auth:
-      converter:
-        resource-id: uth-client
-        principal-attribute: preferred_username
 
 server:
   port: 8080
-
-app:
-  cors:
-    allowed-origins: http://localhost:3000
 
 eureka:
   client:
