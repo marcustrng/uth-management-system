@@ -19,15 +19,19 @@ const initOptions = {pkceMethod: 'S256'}
 const handleOnEvent = async (event, error) => {
   if (event === 'onAuthSuccess') {
     if (keycloak.authenticated) {
-      // let response = await userExtrasMeAPI.getUserExtrasMe(keycloak.token)
-      // if (response.status === 404) {
-      //   const username = keycloak.tokenParsed.preferred_username
-      //   const userExtra = {avatar: username}
-      //   response = await userExtrasMeAPI.saveUserExtrasMe(keycloak.token,
-      //       userExtra)
-      //   console.log('UserExtra created for ' + username)
-      // }
-      // keycloak['avatar'] = response.data.avatar
+      console.log("keycloak", keycloak);
+
+      localStorage.setItem(keycloak.token,
+          JSON.stringify({
+            email: keycloak.idTokenParsed.email,
+            family_name: keycloak.idTokenParsed.family_name,
+            given_name: keycloak.idTokenParsed.given_name,
+            preferred_username: keycloak.idTokenParsed.preferred_username,
+            is_student: keycloak?.tokenParsed?.resource_access?.['uth-client']?.roles?.includes(
+                'UMS_STUDENT') ?? false
+          }));
+
+      // const item = JSON.parse(localStorage.getItem(keycloak.token)).preferred_username;
 
       console.log("authenticated !")
     }

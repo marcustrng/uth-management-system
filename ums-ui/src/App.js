@@ -20,7 +20,8 @@ import {
   Financial,
   ColorPicker,
   ColorMapping,
-  Editor
+  Editor,
+  MyProfile
 } from './Pages';
 import './App.css';
 
@@ -94,17 +95,25 @@ const App = () => {
 
                 <Routes>
                   {/* dashboard  */}
-                  <Route path="/" element={(<PrivateRoute><Ecommerce/></PrivateRoute>)}/>
-                  <Route path="/ecommerce" element={(<PrivateRoute><Ecommerce/></PrivateRoute>)}/>
+                  <Route path="/"
+                         element={(<PrivateRoute><Ecommerce/></PrivateRoute>)}/>
+                  <Route path="/ecommerce"
+                         element={(<PrivateRoute><Ecommerce/></PrivateRoute>)}/>
 
                   {/* pages  */}
                   <Route path="/orders"
                          element={<PrivateRoute><Orders/></PrivateRoute>}/>
-                  <Route path="/employees" element={<PrivateRoute><Employees/></PrivateRoute>}/>
-                  <Route path="/customers" element={<PrivateRoute><Customers/></PrivateRoute>}/>
+                  <Route path="/employees"
+                         element={<PrivateRoute><Employees/></PrivateRoute>}/>
+                  <Route path="/customers"
+                         element={<PrivateRoute><Customers/></PrivateRoute>}/>
+
+                  <Route path="/my-profile"
+                         element={<PrivateRoute><MyProfile/></PrivateRoute>}/>
 
                   {/* apps  */}
-                  <Route path="/kanban" element={<PrivateRoute><Kanban/></PrivateRoute>}/>
+                  <Route path="/kanban"
+                         element={<PrivateRoute><Kanban/></PrivateRoute>}/>
                   <Route path="/editor" element={<Editor/>}/>
                   <Route path="/calendar" element={<Calendar/>}/>
                   <Route path="/color-picker" element={<ColorPicker/>}/>

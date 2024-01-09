@@ -69,6 +69,10 @@ public class KeycloakInitializerRunner implements CommandLineRunner {
                     userRepresentation.setCredentials(List.of(credentialRepresentation));
                     userRepresentation.setClientRoles(getClientRoles(userPass));
 
+                    //
+                    userRepresentation.setFirstName("John");
+                    userRepresentation.setLastName("Doe");
+
                     return userRepresentation;
                 })
                 .toList();

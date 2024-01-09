@@ -7,26 +7,37 @@ spring:
         - id: ums-service-career
           uri: lb://ums-service-career
           predicates:
-            - Path=/careers/**
+            - Path=/ums-service-career/**
           filters:
             - StripPrefix=1
         ## STUDENT SERVICE
         - id: ums-service-enrollment
           uri: lb://ums-service-enrollment
           predicates:
-            - Path=/students/**
+            - Path=/ums-service-enrollment/**
           filters:
             - StripPrefix=1
         ## PLANNING SERVICE
         - id: ums-service-schedule
           uri: lb://ums-service-schedule
           predicates:
-            - Path=/schedules/**
+            - Path=/ums-service-schedule/**
+          filters:
+            - StripPrefix=1
+        ## KEYCLOAK CONNECTOR
+        - id: ums-connector-keycloak
+          uri: lb://ums-connector-keycloak
+          predicates:
+            - Path=/ums-connector-keycloak/**
           filters:
             - StripPrefix=1
 
 server:
   port: 8080
+
+app:
+  cors:
+    allowed-origins: http://localhost:3000
 
 eureka:
   client:
